@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SafeSupply BI - Pro Compliance Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-container": "#4e3d00",
+                        "on-primary-fixed-variant": "#3f465c",
+                        "primary": "#bec6e0",
+                        "surface-variant": "#323537",
+                        "on-primary": "#283044",
+                        "inverse-primary": "#565e74",
+                        "surface": "#101415",
+                        "secondary-fixed-dim": "#b9c7e0",
+                        "secondary-container": "#3c4a5e",
+                        "tertiary": "#e9c349",
+                        "on-tertiary-fixed": "#241a00",
+                        "surface-container-low": "#191c1e",
+                        "on-secondary-fixed-variant": "#3a485c",
+                        "on-primary-container": "#798098",
+                        "surface-container-highest": "#323537",
+                        "primary-fixed": "#dae2fd",
+                        "on-surface": "#e0e3e5",
+                        "secondary": "#b9c7e0",
+                        "on-secondary": "#233144",
+                        "primary-container": "#0f172a",
+                        "outline-variant": "#45464d",
+                        "tertiary-fixed": "#ffe088",
+                        "tertiary-fixed-dim": "#e9c349",
+                        "primary-fixed-dim": "#bec6e0",
+                        "tertiary-container": "#cba72f",
+                        "on-surface-variant": "#c6c6cd",
+                        "on-secondary-container": "#abb9d2",
+                        "surface-dim": "#101415",
+                        "on-secondary-fixed": "#0d1c2f",
+                        "on-tertiary-fixed-variant": "#574500",
+                        "on-background": "#e0e3e5",
+                        "surface-bright": "#363a3b",
+                        "error": "#ffb4ab",
+                        "on-primary-fixed": "#131b2e",
+                        "on-error": "#690005",
+                        "on-tertiary": "#3c2f00",
+                        "secondary-fixed": "#d5e3fd",
+                        "surface-container-high": "#272a2c",
+                        "inverse-on-surface": "#2d3133",
+                        "surface-container": "#1d2022",
+                        "outline": "#909097",
+                        "on-error-container": "#ffdad6",
+                        "inverse-surface": "#e0e3e5",
+                        "error-container": "#93000a",
+                        "background": "#101415",
+                        "surface-container-lowest": "#0b0f10",
+                        "surface-tint": "#bec6e0"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-sm": "8px",
+                        "container-max": "1440px",
+                        "stack-md": "16px",
+                        "stack-lg": "32px",
+                        "margin": "48px",
+                        "unit": "4px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "body-base": ["Inter"],
+                        "data-mono": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-base": ["16px", {"lineHeight": "24px", "letterSpacing": "0", "fontWeight": "400"}],
+                        "data-mono": ["14px", {"lineHeight": "20px", "letterSpacing": "-0.01em", "fontWeight": "500"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #020617; /* Base Layer from Style Guidance */
+            color: #e0e3e5;
+            -webkit-font-smoothing: antialiased;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .tonal-card {
+            background-color: #0F172A; /* Surface Layer */
+            border: 1px solid #1E293B; /* Overlay Layer */
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+        }
+        .glass-glow {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.4) 0%, rgba(15, 23, 42, 0) 100%);
+        }
+    </style>
+</head>
+<body class="font-body-base text-body-base selection:bg-tertiary selection:text-on-tertiary">
+<!-- TopAppBar -->
+<header class="bg-white dark:bg-slate-900 flex justify-between items-center h-16 px-6 w-full sticky top-0 z-50 border-b border-slate-200 dark:border-slate-800 font-inter text-sm antialiased">
+<div class="flex items-center gap-stack-md">
+<span class="text-xl font-bold tracking-tight text-blue-900 dark:text-blue-50">SafeSupply BI</span>
+<span class="bg-tertiary-container text-on-tertiary-container text-[10px] font-bold px-2 py-0.5 rounded-full tracking-widest ml-2 uppercase">PRO TIER</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden md:flex items-center gap-8 mr-8">
+<a class="text-blue-900 dark:text-blue-400 border-b-2 border-blue-900 dark:border-blue-400 h-16 flex items-center transition-all" href="#">Audit Reports</a>
+<a class="text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors h-16 flex items-center px-2" href="#">Executive Dashboard</a>
+<a class="text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors h-16 flex items-center px-2" href="#">Supplier Directory</a>
+</div>
+<div class="flex items-center gap-4 text-slate-500 dark:text-slate-400">
+<span class="material-symbols-outlined cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800 p-2 rounded-full transition-all">notifications</span>
+<span class="material-symbols-outlined cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800 p-2 rounded-full transition-all">help_outline</span>
+<div class="flex items-center gap-2 border-l border-slate-700 pl-4 ml-2">
+<span class="material-symbols-outlined text-blue-400" style="font-variation-settings: 'FILL' 1;">account_circle</span>
+<span class="hidden lg:block font-medium">Tavera Operations</span>
+</div>
+</div>
+</div>
+</header>
+<!-- SideNavBar -->
+<nav class="flex flex-col h-full fixed left-0 top-16 pt-4 pb-8 bg-slate-50 dark:bg-slate-950 w-64 border-r border-slate-200 dark:border-slate-800 transition-all duration-200 ease-in-out font-inter font-medium text-sm hidden md:flex">
+<div class="px-6 mb-8">
+<h3 class="text-slate-400 uppercase text-[10px] tracking-widest font-bold">Main Menu</h3>
+<p class="text-blue-900 dark:text-blue-400 text-xs">Risk Management</p>
+</div>
+<div class="space-y-1">
+<a class="text-slate-600 dark:text-slate-400 py-3 px-6 flex items-center gap-3 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 transition-all" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                Executive Dashboard
+            </a>
+<a class="text-slate-600 dark:text-slate-400 py-3 px-6 flex items-center gap-3 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 transition-all" href="#">
+<span class="material-symbols-outlined">location_city</span>
+                Supplier Directory
+            </a>
+<a class="text-slate-600 dark:text-slate-400 py-3 px-6 flex items-center gap-3 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 transition-all" href="#">
+<span class="material-symbols-outlined">crisis_alert</span>
+                Mobile Alerts
+            </a>
+<a class="bg-blue-50 dark:bg-blue-900/20 text-blue-900 dark:text-blue-200 border-l-4 border-blue-900 dark:border-blue-400 py-3 px-6 flex items-center gap-3 transition-all" href="#">
+<span class="material-symbols-outlined">assignment_turned_in</span>
+                Audit Reports
+            </a>
+<a class="text-slate-600 dark:text-slate-400 py-3 px-6 flex items-center gap-3 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+                Settings
+            </a>
+</div>
+<div class="mt-auto px-6">
+<div class="rounded-xl p-4 bg-primary-container border border-outline-variant/30">
+<p class="text-[10px] text-on-primary-container font-bold uppercase mb-2">Usage Credits</p>
+<div class="w-full bg-slate-800 h-1 rounded-full overflow-hidden">
+<div class="bg-tertiary h-full w-[85%]"></div>
+</div>
+<p class="text-[11px] mt-2 text-slate-400">850/1000 AI Risks Analyzed</p>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="md:ml-64 p-margin max-w-container-max mx-auto">
+<!-- Dashboard Header -->
+<div class="flex flex-col lg:flex-row lg:items-end justify-between gap-stack-lg mb-12">
+<div>
+<div class="flex items-center gap-3 mb-2">
+<span class="bg-tertiary text-on-tertiary text-[10px] font-bold px-2 py-0.5 rounded-sm tracking-widest uppercase">PRO-TIER EXCLUSIVE</span>
+<h1 class="font-display-lg text-display-lg text-on-surface">Compliance Health</h1>
+</div>
+<p class="text-on-surface-variant max-w-2xl font-body-base">Command center for multi-unit operators. Synthesizing cross-supplier data with predictive risk modeling and automated health authority tracking.</p>
+</div>
+<div class="flex gap-stack-md">
+<button class="bg-surface-container-high hover:bg-surface-container-highest text-on-surface flex items-center gap-2 px-stack-lg py-3 rounded-xl border border-outline-variant transition-all">
+<span class="material-symbols-outlined text-sm">filter_alt</span>
+<span class="font-label-caps">Filter Portfolio</span>
+</button>
+<button class="bg-tertiary hover:opacity-90 text-on-tertiary flex items-center gap-2 px-stack-lg py-3 rounded-xl font-bold transition-all shadow-[0_0_20px_rgba(233,195,73,0.3)]">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">bolt</span>
+<span class="font-label-caps">Run Global Audit</span>
+</button>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-12 gap-gutter">
+<!-- Section 1: Aggregate Stats (Compliance Health) -->
+<div class="col-span-12 lg:col-span-8 grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<div class="tonal-card p-stack-lg rounded-xl flex flex-col justify-between h-48">
+<div class="flex items-start justify-between">
+<span class="font-label-caps text-slate-400">Global Score</span>
+<span class="material-symbols-outlined text-tertiary">verified_user</span>
+</div>
+<div>
+<div class="font-display-lg text-4xl text-on-surface mb-1">98.2%</div>
+<p class="text-xs text-green-400 flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+                            +1.4% from last month
+                        </p>
+</div>
+</div>
+<div class="tonal-card p-stack-lg rounded-xl flex flex-col justify-between h-48">
+<div class="flex items-start justify-between">
+<span class="font-label-caps text-slate-400">Total Suppliers</span>
+<span class="material-symbols-outlined text-tertiary">inventory_2</span>
+</div>
+<div>
+<div class="font-display-lg text-4xl text-on-surface mb-1">124</div>
+<p class="text-xs text-slate-400 uppercase tracking-widest">Active Monitoring</p>
+</div>
+</div>
+<div class="tonal-card p-stack-lg rounded-xl flex flex-col justify-between h-48">
+<div class="flex items-start justify-between">
+<span class="font-label-caps text-slate-400">Pending Actions</span>
+<span class="material-symbols-outlined text-error">priority_high</span>
+</div>
+<div>
+<div class="font-display-lg text-4xl text-on-surface mb-1">03</div>
+<p class="text-xs text-error flex items-center gap-1">
+                            Critical response needed
+                        </p>
+</div>
+</div>
+</div><!-- Section: Compliance Trends & Regional Breakdown -->
+<div class="col-span-12 grid grid-cols-12 gap-gutter my-gutter">
+<!-- Compliance Trend Line Chart -->
+<div class="col-span-12 lg:col-span-8 tonal-card rounded-xl p-stack-lg flex flex-col">
+<div class="flex justify-between items-center mb-6">
+<div>
+<h3 class="font-headline-md text-on-surface">Compliance Trend</h3>
+<p class="text-xs text-slate-400">Portfolio-wide health performance over the last 12 months</p>
+</div>
+<div class="flex gap-2">
+<span class="flex items-center gap-1 text-[10px] font-label-caps text-green-400">
+<span class="w-2 h-2 rounded-full bg-green-400"></span> Target (95%)
+                </span>
+<span class="flex items-center gap-1 text-[10px] font-label-caps text-tertiary">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span> Actual
+                </span>
+</div>
+</div>
+<div class="flex-1 min-h-[200px] flex items-end gap-2 px-2">
+<!-- Placeholder for Line Chart Visual -->
+<div class="flex-1 bg-slate-800/30 rounded-t h-[60%] relative group cursor-help">
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-surface-container text-[10px] px-2 py-1 rounded border border-outline-variant">94.2%</div>
+</div>
+<div class="flex-1 bg-slate-800/30 rounded-t h-[65%]"></div>
+<div class="flex-1 bg-slate-800/30 rounded-t h-[70%]"></div>
+<div class="flex-1 bg-slate-800/30 rounded-t h-[68%]"></div>
+<div class="flex-1 bg-slate-800/30 rounded-t h-[75%]"></div>
+<div class="flex-1 bg-slate-800/30 rounded-t h-[82%]"></div>
+<div class="flex-1 bg-slate-800/30 rounded-t h-[80%]"></div>
+<div class="flex-1 bg-slate-800/30 rounded-t h-[85%]"></div>
+<div class="flex-1 bg-slate-800/30 rounded-t h-[88%]"></div>
+<div class="flex-1 bg-slate-800/30 rounded-t h-[92%]"></div>
+<div class="flex-1 bg-slate-800/30 rounded-t h-[95%]"></div>
+<div class="flex-1 bg-tertiary/20 border-t-2 border-tertiary rounded-t h-[98%]"></div>
+</div>
+<div class="flex justify-between mt-4 px-2 text-[10px] text-slate-500 font-label-caps">
+<span>JAN</span><span>FEB</span><span>MAR</span><span>APR</span><span>MAY</span><span>JUN</span><span>JUL</span><span>AUG</span><span>SEP</span><span>OCT</span><span>NOV</span><span>DEC</span>
+</div>
+</div>
+<!-- Regional Breakdown Bar Chart -->
+<div class="col-span-12 lg:col-span-4 tonal-card rounded-xl p-stack-lg">
+<h3 class="font-headline-md text-on-surface mb-1">Regional Breakdown</h3>
+<p class="text-xs text-slate-400 mb-8">Comparative performance: VCH vs Fraser Health</p>
+<div class="space-y-8">
+<div class="space-y-3">
+<div class="flex justify-between items-end">
+<span class="text-sm font-medium text-on-surface">Vancouver Coastal Health</span>
+<span class="text-xs font-bold text-tertiary">98.8%</span>
+</div>
+<div class="w-full bg-slate-800 h-3 rounded-full overflow-hidden">
+<div class="bg-tertiary h-full w-[98.8%]"></div>
+</div>
+</div>
+<div class="space-y-3">
+<div class="flex justify-between items-end">
+<span class="text-sm font-medium text-on-surface">Fraser Health Authority</span>
+<span class="text-xs font-bold text-blue-400">91.2%</span>
+</div>
+<div class="w-full bg-slate-800 h-3 rounded-full overflow-hidden">
+<div class="bg-blue-500 h-full w-[91.2%]"></div>
+</div>
+</div>
+<div class="mt-8 p-4 bg-surface-container-low rounded-lg border border-outline-variant/20">
+<div class="flex items-center gap-2 text-error text-[10px] font-bold uppercase mb-1">
+<span class="material-symbols-outlined text-sm">warning</span> Variance Detected
+                </div>
+<p class="text-[11px] text-slate-400">Fraser Health trailing by 7.6%. Recommendation: Review Cold Chain logs for Delta hub.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Section 2: Risk Prediction (Historical Recidivism) -->
+<div class="col-span-12 lg:col-span-4 tonal-card rounded-xl p-stack-lg relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-32 h-32 glass-glow opacity-20 pointer-events-none"></div>
+<div class="flex items-center gap-3 mb-stack-lg">
+<div class="p-2 bg-tertiary/10 rounded-lg">
+<span class="material-symbols-outlined text-tertiary" style="font-variation-settings: 'FILL' 1;">insights</span>
+</div>
+<h3 class="font-headline-md text-on-surface">Risk Prediction</h3>
+</div>
+<p class="text-xs text-slate-400 mb-6 font-medium">Predictive forecasting based on historical recidivism and market trends.</p>
+<div class="space-y-stack-lg">
+<div class="space-y-2">
+<div class="flex justify-between text-xs mb-1">
+<span class="text-on-surface">Closure Risk (90-Day)</span>
+<span class="text-green-400 font-bold">LOW (2%)</span>
+</div>
+<div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+<div class="bg-green-500 h-full w-[2%]"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-xs mb-1">
+<span class="text-on-surface">Health Dept. Incursion</span>
+<span class="text-tertiary font-bold">MED (14%)</span>
+</div>
+<div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+<div class="bg-tertiary h-full w-[14%]"></div>
+</div>
+</div>
+<div class="mt-8 pt-4 border-t border-outline-variant/30">
+<img alt="Risk Trends" class="w-full h-24 object-cover rounded-lg" data-alt="A sophisticated data visualization chart showing predictive risk trends using a sleek dark-themed interface. The graph features smooth glowing lines in gold and emerald green against a deep slate background, illustrating historical recidivism rates versus future projections. The aesthetic is clean, professional, and optimized for high-level executive intelligence." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBykvhTJguSZA7a7aV4VG9y5NAwIZk4P4FFVWs4HUg8TyWuNEwi6hBAZXnPBo9DcXL2urZDOnPbUU_lTPEmKyYhZSSxuHL_d5dz-KMWTtez2bel7vb8PWzyUgRBoiIrZCKkan5DKB_Bz1Lttjsifm3wG80Qo6aTIoUT8i5HxfY7ycxT6csLmCs7AD---WJi4S5EHextWQ0PmlsBn_HkM9av-LtB0xNLO5xwhzF-zKKt1sk969XXqEzihQxxBBlb9d9aAM5mdfXJJu7N"/>
+</div>
+</div>
+</div>
+<!-- Section 3: Automated Audit Logs -->
+<div class="col-span-12 lg:col-span-8 tonal-card rounded-xl overflow-hidden">
+<div class="p-stack-lg border-b border-outline-variant/30 flex justify-between items-center">
+<div>
+<h3 class="font-headline-md text-on-surface">Automated Audit Logs</h3>
+<p class="text-xs text-slate-400">Recurring health authority documentation status</p>
+</div>
+<button class="text-blue-400 hover:text-blue-300 transition-all font-label-caps flex items-center gap-1">
+                        VIEW FULL HISTORY <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-surface-container-low">
+<tr>
+<th class="px-6 py-4 font-label-caps text-slate-400 text-[10px]">SUPPLIER UNIT</th>
+<th class="px-6 py-4 font-label-caps text-slate-400 text-[10px]">DOCUMENT TYPE</th>
+<th class="px-6 py-4 font-label-caps text-slate-400 text-[10px]">LAST SYNC</th>
+<th class="px-6 py-4 font-label-caps text-slate-400 text-[10px]">STATUS</th>
+<th class="px-6 py-4 font-label-caps text-slate-400 text-[10px]">ACTION</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/20">
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-6 py-4">
+<div class="font-medium text-on-surface">Prime Logistics Alpha</div>
+<div class="text-[10px] text-slate-500">ID: #PLA-992</div>
+</td>
+<td class="px-6 py-4 text-sm text-slate-300">FDA Food Safety Ver.</td>
+<td class="px-6 py-4 text-sm text-slate-400">2h ago</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-green-500/10 text-green-400 border border-green-500/20">VERIFIED</span>
+</td>
+<td class="px-6 py-4">
+<span class="material-symbols-outlined text-slate-400 cursor-pointer hover:text-on-surface">visibility</span>
+</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-6 py-4">
+<div class="font-medium text-on-surface">Global Cold Chain</div>
+<div class="text-[10px] text-slate-500">ID: #GCC-104</div>
+</td>
+<td class="px-6 py-4 text-sm text-slate-300">Temp Control Logs</td>
+<td class="px-6 py-4 text-sm text-slate-400">14m ago</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-green-500/10 text-green-400 border border-green-500/20">VERIFIED</span>
+</td>
+<td class="px-6 py-4">
+<span class="material-symbols-outlined text-slate-400 cursor-pointer hover:text-on-surface">visibility</span>
+</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-6 py-4">
+<div class="font-medium text-on-surface">Metropolitan Meats</div>
+<div class="text-[10px] text-slate-500">ID: #MMT-441</div>
+</td>
+<td class="px-6 py-4 text-sm text-slate-300">USDA Facility Audit</td>
+<td class="px-6 py-4 text-sm text-slate-400">Oct 12, 2023</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-tertiary/10 text-tertiary border border-tertiary/20">UPDATING</span>
+</td>
+<td class="px-6 py-4">
+<span class="material-symbols-outlined text-slate-400 cursor-pointer hover:text-on-surface">sync</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Section 4: Insurance-Ready Exports -->
+<div class="col-span-12 lg:col-span-4 flex flex-col gap-gutter">
+<div class="tonal-card rounded-xl p-stack-lg flex-1">
+<h3 class="font-headline-md text-on-surface mb-1">Insurance-Ready Exports</h3>
+<p class="text-xs text-slate-400 mb-6">Instantly bundle all compliance documentation for underwriting or legal audits.</p>
+<div class="space-y-stack-md">
+<div class="p-4 bg-surface-container rounded-lg border border-outline-variant/20 flex items-center justify-between group hover:border-tertiary/50 transition-all cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded bg-red-500/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-red-400">picture_as_pdf</span>
+</div>
+<div>
+<div class="text-sm font-medium text-on-surface">Annual Master Bundle</div>
+<div class="text-[10px] text-slate-500">2023 Fiscal • 142MB</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-500 group-hover:text-tertiary">download</span>
+</div>
+<div class="p-4 bg-surface-container rounded-lg border border-outline-variant/20 flex items-center justify-between group hover:border-tertiary/50 transition-all cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded bg-blue-500/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-blue-400">description</span>
+</div>
+<div>
+<div class="text-sm font-medium text-on-surface">Liability Proof Set</div>
+<div class="text-[10px] text-slate-500">Current Q4 • 24MB</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-500 group-hover:text-tertiary">download</span>
+</div>
+<div class="p-4 bg-surface-container rounded-lg border border-outline-variant/20 flex items-center justify-between group hover:border-tertiary/50 transition-all cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded bg-green-500/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-green-400">folder_zip</span>
+</div>
+<div>
+<div class="text-sm font-medium text-on-surface">Raw Data Export</div>
+<div class="text-[10px] text-slate-500">CSV/JSON Format • 8MB</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-500 group-hover:text-tertiary">download</span>
+</div>
+</div>
+</div>
+<!-- Support Anchor Card -->
+<div class="bg-primary-container rounded-xl p-stack-lg border border-blue-900/40">
+<div class="flex items-center gap-4 mb-4">
+<img alt="Concierge" class="w-12 h-12 rounded-full border-2 border-tertiary" data-alt="A professional headshot of a premium concierge support executive in a sharp business suit. The background is a blurred high-end corporate office with soft, cinematic lighting in shades of deep blue and amber. The image conveys authority, trustworthiness, and exclusive white-glove service, matching the dark executive theme of the dashboard." src="https://lh3.googleusercontent.com/aida-public/AB6AXuApbtqK693DWAGxAk0cBserDZT8E-PZD37SJvyD5dP-mWWpSuJnAbKID7Z-0X1C6PfhaqDcEqwMy8ADauVeyawEOAYc5fBxQwqPjDt5BN4Mct4UfeADw6tAz7Gk1QSDj34PPLvMIWT2RoXba6gcb64ZXFffs4U5vorXOc4CDp1-KOK-uzncH-IYC0MQyMjDSCSnhZbGmGMN1HfQvVc4tUqbLw9EjCAdLPFdB_SMiqLvNV_YtcOPWBA3wITLuC0wEisGvKhi2E9EDm1K"/>
+<div>
+<div class="text-sm font-bold text-on-surface">Pro Concierge</div>
+<div class="text-[10px] text-blue-400 uppercase tracking-widest font-bold">Priority Support</div>
+</div>
+</div>
+<p class="text-[11px] text-on-primary-container leading-relaxed mb-4">Need help with custom regulatory reporting? Your dedicated account manager is online.</p>
+<button class="w-full py-2 bg-on-primary-container text-primary-container rounded font-bold text-xs hover:bg-white transition-all">START SECURE CHAT</button>
+</div>
+</div>
+</div>
+<!-- Footer / Bottom Branding -->
+<footer class="mt-20 pt-8 border-t border-outline-variant/20 flex flex-col md:flex-row justify-between items-center gap-4 opacity-50">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">verified</span>
+<span class="text-[10px] font-label-caps tracking-widest">ENCRYPTED INTELLIGENCE • SAFESUPPLY BI V2.4.0</span>
+</div>
+<div class="flex gap-8 text-[10px] font-label-caps tracking-widest">
+<a class="hover:text-tertiary transition-colors" href="#">PRIVACY POLICY</a>
+<a class="hover:text-tertiary transition-colors" href="#">TERMS OF SERVICE</a>
+<a class="hover:text-tertiary transition-colors" href="#">REGULATORY COMPLIANCE</a>
+</div>
+</footer>
+</main>
+<!-- Contextual FAB (Only on relevant screens) -->
+<div class="fixed bottom-8 right-8 z-50">
+<button class="w-14 h-14 bg-tertiary text-on-tertiary rounded-full shadow-2xl flex items-center justify-center hover:scale-105 active:scale-95 transition-all">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add</span>
+</button>
+</div>
+</body></html>

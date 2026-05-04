@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SafeSupply BI - Preview &amp; Export</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "tertiary-container": "#cba72f",
+            "tertiary-fixed-dim": "#e9c349",
+            "on-primary-fixed-variant": "#3f465c",
+            "on-primary-fixed": "#131b2e",
+            "background": "#101415",
+            "secondary": "#b9c7e0",
+            "surface": "#101415",
+            "outline": "#909097",
+            "surface-container-low": "#191c1e",
+            "surface-tint": "#bec6e0",
+            "inverse-surface": "#e0e3e5",
+            "outline-variant": "#45464d",
+            "surface-container-lowest": "#0b0f10",
+            "primary-container": "#0f172a",
+            "primary": "#bec6e0",
+            "surface-container-highest": "#323537",
+            "on-secondary": "#233144",
+            "on-secondary-container": "#abb9d2",
+            "on-background": "#e0e3e5",
+            "surface-variant": "#323537",
+            "error": "#ffb4ab",
+            "on-error-container": "#ffdad6",
+            "on-error": "#690005",
+            "on-primary": "#283044",
+            "tertiary": "#e9c349",
+            "surface-container": "#1d2022",
+            "on-surface": "#e0e3e5",
+            "on-secondary-fixed": "#0d1c2f",
+            "secondary-fixed": "#d5e3fd",
+            "inverse-on-surface": "#2d3133",
+            "on-tertiary-container": "#4e3d00",
+            "primary-fixed": "#dae2fd",
+            "surface-dim": "#101415",
+            "primary-fixed-dim": "#bec6e0",
+            "on-tertiary-fixed": "#241a00",
+            "surface-container-high": "#272a2c",
+            "on-tertiary": "#3c2f00",
+            "on-secondary-fixed-variant": "#3a485c",
+            "inverse-primary": "#565e74",
+            "on-tertiary-fixed-variant": "#574500",
+            "on-surface-variant": "#c6c6cd",
+            "tertiary-fixed": "#ffe088",
+            "surface-bright": "#363a3b",
+            "secondary-container": "#3c4a5e",
+            "error-container": "#93000a",
+            "secondary-fixed-dim": "#b9c7e0",
+            "on-primary-container": "#798098"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "stack-lg": "32px",
+            "gutter": "24px",
+            "margin": "48px",
+            "unit": "4px",
+            "container-max": "1440px",
+            "stack-md": "16px",
+            "stack-sm": "8px"
+          },
+          "fontFamily": {
+            "body-base": ["Inter"],
+            "data-mono": ["Inter"],
+            "headline-md": ["Inter"],
+            "display-lg": ["Inter"],
+            "label-caps": ["Inter"]
+          },
+          "fontSize": {
+            "body-base": ["16px", {"lineHeight": "24px", "letterSpacing": "0", "fontWeight": "400"}],
+            "data-mono": ["14px", {"lineHeight": "20px", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+            "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+            "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+            "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      vertical-align: middle;
+    }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #101415; }
+    ::-webkit-scrollbar-thumb { background: #323537; border-radius: 10px; }
+    .glass-effect {
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-background font-body-base antialiased min-h-screen overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center h-16 px-6 w-full sticky top-0 z-50 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 font-inter text-sm antialiased shadow-none">
+<div class="flex items-center gap-4">
+<span class="text-xl font-bold tracking-tight text-blue-900 dark:text-blue-50">SafeSupply BI</span>
+<nav class="hidden md:flex ml-8 space-x-1"><a class="text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors py-2 px-3 rounded-lg" href="#">Executive Dashboard</a>
+<a class="text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors py-2 px-3 rounded-lg" href="#">Supplier Directory</a>
+<a class="text-blue-900 dark:text-blue-400 border-b-2 border-blue-900 dark:border-blue-400 py-2 px-3" href="#">Audit Reports</a></nav>
+</div>
+<div class="flex items-center space-x-2">
+<button class="p-2 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all scale-95 active:opacity-80 rounded-full">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all scale-95 active:opacity-80 rounded-full">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+<div class="h-8 w-8 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container ml-2"><span class="material-symbols-outlined" title="The Bistro Group">store</span></div>
+</div>
+</header>
+<!-- SideNavBar -->
+<aside class="flex flex-col h-full fixed left-0 top-16 pt-4 pb-8 h-screen w-64 border-r border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 font-inter font-medium text-sm z-40 hidden xl:flex">
+<div class="px-6 mb-8">
+<p class="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">Main Menu</p>
+<p class="text-xs text-blue-900 dark:text-blue-400">Risk Management</p>
+</div>
+<nav class="flex-1 space-y-1"><a class="text-slate-600 dark:text-slate-400 py-3 px-4 flex items-center hover:bg-slate-200/50 dark:hover:bg-slate-800/50 transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined mr-3">dashboard</span>
+  Executive Dashboard
+</a>
+<a class="text-slate-600 dark:text-slate-400 py-3 px-4 flex items-center hover:bg-slate-200/50 dark:hover:bg-slate-800/50 transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined mr-3">location_city</span>
+  Supplier Directory
+</a>
+<a class="text-slate-600 dark:text-slate-400 py-3 px-4 flex items-center hover:bg-slate-200/50 dark:hover:bg-slate-800/50 transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined mr-3">crisis_alert</span>
+  Mobile Alerts
+</a>
+<a class="bg-blue-50 dark:bg-blue-900/20 text-blue-900 dark:text-blue-200 border-l-4 border-blue-900 dark:border-blue-400 py-3 px-4 flex items-center" href="#">
+<span class="material-symbols-outlined mr-3">assignment_turned_in</span>
+  Audit Reports
+</a>
+<a class="text-slate-600 dark:text-slate-400 py-3 px-4 flex items-center hover:bg-slate-200/50 dark:hover:bg-slate-800/50 transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined mr-3">settings</span>
+  Settings
+</a></nav>
+<div class="px-4 mt-auto">
+<div class="p-4 bg-primary-container rounded-xl flex items-center gap-3"><div class="w-10 h-10 rounded-lg bg-tertiary-container flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-on-tertiary-container">restaurant</span>
+</div>
+<div class="overflow-hidden">
+<p class="text-xs font-bold text-on-surface truncate">The Bistro Group</p>
+<p class="text-[10px] text-on-surface-variant">Executive Owner</p>
+</div></div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="xl:ml-64 p-margin min-h-[calc(100vh-64px)]">
+<div class="max-w-container-max mx-auto">
+<!-- Page Header -->
+<header class="mb-stack-lg flex justify-between items-end">
+<div>
+<nav class="flex items-center gap-2 mb-2 text-on-surface-variant"><a class="text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors py-2 px-3 rounded-lg" href="#">Executive Dashboard</a>
+<a class="text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors py-2 px-3 rounded-lg" href="#">Supplier Directory</a>
+<a class="text-blue-900 dark:text-blue-400 border-b-2 border-blue-900 dark:border-blue-400 py-2 px-3" href="#">Audit Reports</a></nav>
+<h1 class="font-display-lg text-display-lg text-on-surface tracking-tight">Report Finalization</h1>
+<p class="text-on-surface-variant max-w-2xl mt-2">Review your supply chain intelligence report before distribution. All risk vectors and entity resolutions have been validated against live data streams.</p>
+</div>
+<div class="flex gap-stack-sm">
+<button class="px-gutter py-3 rounded-lg border border-outline-variant hover:bg-surface-variant transition-colors flex items-center gap-2 font-medium">
+<span class="material-symbols-outlined" data-icon="edit">edit</span>
+            Edit Selection
+          </button>
+</div>
+</header>
+<div class="grid grid-cols-12 gap-gutter items-start">
+<!-- Report Preview Section (Left) -->
+<section class="col-span-12 lg:col-span-8">
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant shadow-2xl p-stack-lg min-h-[1000px] relative overflow-hidden">
+<!-- PDF Canvas Simulator -->
+<div class="bg-white text-slate-900 rounded-sm shadow-inner min-h-full p-12 font-serif">
+<!-- Report Header -->
+<div class="flex justify-between items-start border-b-2 border-slate-900 pb-8 mb-8">
+<div>
+<div class="text-2xl font-bold tracking-tighter text-blue-900">TAVERA</div>
+<div class="text-[10px] uppercase tracking-widest text-slate-500 font-sans mt-1">Global Supply Intelligence</div>
+</div>
+<div class="text-right">
+<h2 class="text-xl font-bold uppercase">Compliance &amp; Risk Audit</h2>
+<p class="text-xs font-sans text-slate-500 mt-1">Report ID: TR-2024-00892-QX</p>
+<p class="text-xs font-sans text-slate-500">Date: October 24, 2024</p>
+</div>
+</div>
+<!-- Executive Summary Card -->
+<div class="mb-10 p-6 bg-slate-50 border border-slate-200 rounded-lg">
+<h3 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4 font-sans">Executive Summary</h3>
+<div class="grid grid-cols-3 gap-8">
+<div class="col-span-2">
+<p class="text-sm leading-relaxed">This intelligence report covers the resolution of <strong>Global Tech Logistics</strong> and its 14 subsidiary entities. Our analysis identifies a moderate exposure in the Southeast Asian logistics corridor, primarily driven by Tier-3 transparency gaps.</p>
+</div>
+<div class="text-center border-l border-slate-200 pl-8">
+<div class="text-3xl font-bold text-red-600">72</div>
+<div class="text-[10px] font-sans font-bold uppercase text-slate-500">Aggregate Risk Score</div>
+</div>
+</div>
+</div>
+<!-- Supplier Summary Table -->
+<div class="mb-10">
+<h3 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4 font-sans">Supplier Inventory &amp; Legal Resolution</h3>
+<table class="w-full text-left text-sm font-sans border-collapse">
+<thead>
+<tr class="border-b border-slate-900 text-[11px] font-bold uppercase">
+<th class="py-2">Legal Entity Name</th>
+<th class="py-2">Jurisdiction</th>
+<th class="py-2">Operational Status</th>
+<th class="py-2 text-right">Risk Factor</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100">
+<tr>
+<td class="py-3 font-semibold">GTL Marine Services Ltd.</td>
+<td class="py-3">Singapore</td>
+<td class="py-3"><span class="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded text-[10px] font-bold">ACTIVE</span></td>
+<td class="py-3 text-right text-emerald-600 font-bold">Low</td>
+</tr>
+<tr>
+<td class="py-3 font-semibold">Pacific Hub Logistics</td>
+<td class="py-3">Vietnam</td>
+<td class="py-3"><span class="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded text-[10px] font-bold">ACTIVE</span></td>
+<td class="py-3 text-right text-orange-600 font-bold">Medium</td>
+</tr>
+<tr>
+<td class="py-3 font-semibold">Red Cloud Solutions Group</td>
+<td class="py-3">Hong Kong</td>
+<td class="py-3"><span class="bg-amber-100 text-amber-800 px-2 py-0.5 rounded text-[10px] font-bold">UNDER REVIEW</span></td>
+<td class="py-3 text-right text-red-600 font-bold">High</td>
+</tr>
+<tr>
+<td class="py-3 font-semibold">Northern Star Shipping</td>
+<td class="py-3">Panama</td>
+<td class="py-3"><span class="bg-slate-100 text-slate-800 px-2 py-0.5 rounded text-[10px] font-bold">INACTIVE</span></td>
+<td class="py-3 text-right text-slate-400 font-bold">N/A</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Risk Visualization -->
+<div class="mb-10">
+<h3 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-6 font-sans">Risk Score Breakdown</h3>
+<div class="grid grid-cols-2 gap-12">
+<div class="space-y-4">
+<div class="flex justify-between text-xs font-sans">
+<span>Ownership Transparency</span>
+<span class="font-bold">85/100</span>
+</div>
+<div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+<div class="bg-blue-600 h-full w-[85%]"></div>
+</div>
+<div class="flex justify-between text-xs font-sans">
+<span>Financial Integrity</span>
+<span class="font-bold">62/100</span>
+</div>
+<div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+<div class="bg-orange-500 h-full w-[62%]"></div>
+</div>
+<div class="flex justify-between text-xs font-sans">
+<span>Geopolitical Stability</span>
+<span class="font-bold">44/100</span>
+</div>
+<div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+<div class="bg-red-500 h-full w-[44%]"></div>
+</div>
+</div>
+<div>
+<div class="aspect-square bg-slate-50 rounded-lg flex items-center justify-center p-6 border border-slate-100">
+<img alt="Risk Chart" class="w-full h-full object-contain grayscale opacity-70" data-alt="A sophisticated data visualization showing a radar chart with multiple axes representing different risk vectors like environmental impact, labor practices, and financial stability. The chart is rendered in a minimalist, academic style with thin lines and elegant typography, perfectly suited for a premium executive PDF report." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD892m6KaJEi_tUDDX-9T9kLOlpJrH_1cGEM02_0ltxJx8OUvY4chSeewrkNZDOmrRsvHjh5g8VjmgT6TNTfZwugB5kFzAmyM-w-dqF7nZf7M30UZ-TQQ3YFKGr7bQEHffPssUMWsl-vJjvhNllJBusEhwmx6IaCZcIHQ87X6h64CIJ0rz49VD1OoFZ0xiKtWZftHh77RWX51Ll_FI7UArbmom4mWwl7HE2414NFZapVCI1sx5_PLw5sO0OveHLlOhXvXLWk1RhCKK4"/>
+</div>
+</div>
+</div>
+</div>
+<!-- Legal Entity Map -->
+<div>
+<h3 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4 font-sans">Operational Footprint</h3>
+<div class="w-full aspect-[21/9] bg-slate-100 rounded-lg overflow-hidden border border-slate-200">
+<div class="w-full h-full grayscale opacity-50 relative">
+<div class="absolute inset-0 flex items-center justify-center font-sans text-[10px] text-slate-400">Map Interface Simulation</div>
+<img alt="Global Supply Chain Map" class="w-full h-full object-cover" data-alt="A high-contrast monochrome satellite view of a global map with connecting nodes and faint glowing paths illustrating supply chain logistics. The map is presented in a dark, professional aesthetic with clean vector lines representing international trade routes and legal entity hubs in major financial centers." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAczRMzF7UuYkRj0eExohMXFeXSBOAE31ZE-sbPC9aYZCsenmfeiS6-kewI394HZWKBDSNT5iLZwLVYi0ttQ8hW9hsQNqKTzf37Of3EvJHn2MIb3XOVZ7fEtCIKVGyNx69cdQvcYt-yvsz_qghgFNBrLU2sKSONIfq6_9vFSPvLDeNI_3qpJfXNv7KQ_YatoryNHuod9zumPeC4vYd1iZ6eWtbHVIv6i6rvwBdcbhtCmbK_kHwYTKMgmrFGadzwXlpKvVdl3TSwyt57"/>
+</div>
+</div>
+</div>
+</div>
+<!-- Page Number Indicator Overlay -->
+<div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-4 bg-slate-900/80 backdrop-blur px-4 py-2 rounded-full border border-slate-700">
+<button class="text-slate-400 hover:text-white"><span class="material-symbols-outlined">chevron_left</span></button>
+<span class="text-xs font-bold text-white tracking-widest uppercase">Page 01 of 12</span>
+<button class="text-slate-400 hover:text-white"><span class="material-symbols-outlined">chevron_right</span></button>
+</div>
+</div>
+</section>
+<!-- Sidebar Export Settings (Right) -->
+<aside class="col-span-12 lg:col-span-4 flex flex-col gap-gutter">
+<!-- Format Selection -->
+<div class="bg-surface-container rounded-xl border border-outline-variant p-stack-lg shadow-lg">
+<h3 class="text-headline-md font-headline-md text-on-surface mb-stack-md">Export Settings</h3>
+<div class="space-y-stack-md">
+<label class="block group cursor-pointer">
+<input checked="" class="hidden peer" name="format" type="radio"/>
+<div class="p-4 rounded-xl border border-outline-variant bg-surface-container-low peer-checked:border-tertiary peer-checked:bg-primary-container transition-all flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-surface flex items-center justify-center text-red-400">
+<span class="material-symbols-outlined text-3xl" data-icon="picture_as_pdf">picture_as_pdf</span>
+</div>
+<div class="flex-1">
+<p class="font-bold text-on-surface">PDF Document</p>
+<p class="text-xs text-on-surface-variant">High-fidelity, print-ready file</p>
+</div>
+<div class="w-5 h-5 rounded-full border-2 border-outline-variant peer-checked:border-tertiary flex items-center justify-center">
+<div class="w-2.5 h-2.5 bg-tertiary rounded-full opacity-0 peer-checked:opacity-100"></div>
+</div>
+</div>
+</label>
+<label class="block group cursor-pointer">
+<input class="hidden peer" name="format" type="radio"/>
+<div class="p-4 rounded-xl border border-outline-variant bg-surface-container-low peer-checked:border-tertiary peer-checked:bg-primary-container transition-all flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-surface flex items-center justify-center text-emerald-400">
+<span class="material-symbols-outlined text-3xl" data-icon="csv">table_chart</span>
+</div>
+<div class="flex-1">
+<p class="font-bold text-on-surface">CSV Spreadsheet</p>
+<p class="text-xs text-on-surface-variant">Raw data for external BI tools</p>
+</div>
+<div class="w-5 h-5 rounded-full border-2 border-outline-variant peer-checked:border-tertiary"></div>
+</div>
+</label>
+<label class="block group cursor-pointer">
+<input class="hidden peer" name="format" type="radio"/>
+<div class="p-4 rounded-xl border border-outline-variant bg-surface-container-low peer-checked:border-tertiary peer-checked:bg-primary-container transition-all flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-surface flex items-center justify-center text-blue-400">
+<span class="material-symbols-outlined text-3xl" data-icon="link">link</span>
+</div>
+<div class="flex-1">
+<p class="font-bold text-on-surface">Secure Share Link</p>
+<p class="text-xs text-on-surface-variant">Encrypted, time-limited portal</p>
+</div>
+<div class="w-5 h-5 rounded-full border-2 border-outline-variant peer-checked:border-tertiary"></div>
+</div>
+</label>
+</div>
+</div>
+<!-- Document Customization -->
+<div class="bg-surface-container rounded-xl border border-outline-variant p-stack-lg shadow-lg">
+<h4 class="text-label-caps text-on-surface-variant uppercase mb-stack-md tracking-widest">Document Options</h4>
+<div class="space-y-4">
+<div class="flex items-center justify-between">
+<span class="text-sm">Include Raw Data Tables</span>
+<button class="w-10 h-5 bg-tertiary rounded-full relative">
+<div class="absolute right-1 top-1 w-3 h-3 bg-on-tertiary rounded-full"></div>
+</button>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-sm">Watermark: "CONFIDENTIAL"</span>
+<button class="w-10 h-5 bg-tertiary rounded-full relative">
+<div class="absolute right-1 top-1 w-3 h-3 bg-on-tertiary rounded-full"></div>
+</button>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-sm">Include Methodology Page</span>
+<button class="w-10 h-5 bg-outline-variant rounded-full relative">
+<div class="absolute left-1 top-1 w-3 h-3 bg-surface rounded-full"></div>
+</button>
+</div>
+<div class="pt-4 border-t border-outline-variant">
+<label class="block text-xs font-bold text-on-surface-variant mb-2 uppercase">Distribution Channel</label>
+<select class="w-full bg-surface-container-low border-outline-variant rounded-lg text-sm p-3 focus:border-tertiary focus:ring-0">
+<option>Email to Stakeholders</option>
+<option>SFTP Upload</option>
+<option>Local Download Only</option>
+</select>
+</div>
+</div>
+</div>
+<!-- Action Button -->
+<div class="mt-4">
+<button class="w-full bg-tertiary text-on-tertiary py-5 rounded-xl font-bold flex items-center justify-center gap-3 shadow-[0_20px_40px_rgba(233,195,73,0.15)] hover:scale-[1.02] active:scale-[0.98] transition-all">
+<span class="material-symbols-outlined" data-icon="cloud_download">cloud_download</span>
+              Finalize &amp; Download
+            </button>
+<p class="text-center text-[11px] text-on-surface-variant mt-4 leading-relaxed">By clicking finalize, you confirm this report meets the required compliance standards for executive distribution.</p>
+</div>
+</aside>
+</div>
+</div>
+</main>
+<!-- Mobile Bottom Nav (Suppressed on large screens) -->
+<footer class="md:hidden fixed bottom-0 left-0 right-0 h-16 bg-white dark:bg-slate-900 flex justify-around items-center z-50 border-t dark:border-slate-800">
+<button class="flex flex-col items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-[10px]">Home</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined">location_city</span>
+<span class="text-[10px]">Suppliers</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-blue-900 dark:text-blue-400">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">assignment_turned_in</span>
+<span class="text-[10px]">Audit</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-[10px]">Settings</span>
+</button>
+</footer>
+</body></html>

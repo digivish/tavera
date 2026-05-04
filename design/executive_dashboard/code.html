@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SafeSupply BI - Tavera Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "error": "#ffb4ab",
+                    "surface": "#101415",
+                    "error-container": "#93000a",
+                    "secondary-container": "#3c4a5e",
+                    "on-tertiary-container": "#4e3d00",
+                    "on-surface-variant": "#c6c6cd",
+                    "surface-variant": "#323537",
+                    "surface-container": "#1d2022",
+                    "outline-variant": "#45464d",
+                    "on-primary-container": "#798098",
+                    "surface-container-low": "#191c1e",
+                    "surface-container-highest": "#323537",
+                    "on-error-container": "#ffdad6",
+                    "primary": "#bec6e0",
+                    "on-tertiary-fixed-variant": "#574500",
+                    "on-primary": "#283044",
+                    "on-surface": "#e0e3e5",
+                    "on-secondary-fixed": "#0d1c2f",
+                    "secondary-fixed-dim": "#b9c7e0",
+                    "on-secondary-container": "#abb9d2",
+                    "on-secondary": "#233144",
+                    "surface-dim": "#101415",
+                    "inverse-on-surface": "#2d3133",
+                    "on-background": "#e0e3e5",
+                    "surface-container-lowest": "#0b0f10",
+                    "tertiary-fixed": "#ffe088",
+                    "inverse-primary": "#565e74",
+                    "tertiary-fixed-dim": "#e9c349",
+                    "primary-container": "#0f172a",
+                    "surface-tint": "#bec6e0",
+                    "on-primary-fixed": "#131b2e",
+                    "tertiary": "#e9c349",
+                    "surface-container-high": "#272a2c",
+                    "on-error": "#690005",
+                    "secondary": "#b9c7e0",
+                    "primary-fixed": "#dae2fd",
+                    "background": "#0F172A",
+                    "surface-bright": "#363a3b",
+                    "inverse-surface": "#e0e3e5",
+                    "on-tertiary-fixed": "#241a00",
+                    "primary-fixed-dim": "#bec6e0",
+                    "tertiary-container": "#cba72f",
+                    "outline": "#909097",
+                    "secondary-fixed": "#d5e3fd",
+                    "on-tertiary": "#3c2f00",
+                    "on-primary-fixed-variant": "#3f465c",
+                    "on-secondary-fixed-variant": "#3a485c"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "unit": "4px",
+                    "stack-md": "16px",
+                    "container-max": "1440px",
+                    "gutter": "24px",
+                    "stack-sm": "8px",
+                    "stack-lg": "32px",
+                    "margin": "48px"
+            },
+            "fontFamily": {
+                    "display-lg": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "body-base": ["Inter"],
+                    "label-caps": ["Inter"],
+                    "data-mono": ["Inter"],
+                    "h1": ["Inter"],
+                    "h2": ["Inter"],
+                    "h3": ["Inter"]
+            },
+            "fontSize": {
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-base": ["16px", {"lineHeight": "24px", "letterSpacing": "0", "fontWeight": "400"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "data-mono": ["14px", {"lineHeight": "20px", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+                    "h1": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "h2": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "h3": ["18px", {"lineHeight": "1.4", "letterSpacing": "0", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-background antialiased">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center h-16 px-6 w-full sticky top-0 z-50 bg-primary-container border-b border-slate-800"><div class="flex items-center gap-4">
+<span class="text-xl font-bold tracking-tight text-white">SafeSupply BI</span>
+</div>
+<nav class="hidden lg:flex items-center gap-8">
+<a class="text-sm font-medium text-white hover:text-primary transition-colors" href="#">Executive Dashboard</a>
+<a class="text-sm font-medium text-slate-400 hover:text-white transition-colors" href="#">Supplier Directory</a>
+<a class="text-sm font-medium text-slate-400 hover:text-white transition-colors" href="#">Audit Reports</a>
+</nav>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2">
+<button class="p-2 text-slate-400 hover:text-white hover:bg-slate-800 transition-colors rounded-lg">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-slate-400 hover:text-white hover:bg-slate-800 transition-colors rounded-lg">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<div class="flex items-center gap-3 ml-2 pl-4 border-l border-slate-800">
+<span class="text-sm font-medium text-slate-300">The Bistro Group</span>
+<button class="p-1 text-slate-400 hover:text-white transition-colors">
+<span class="material-symbols-outlined text-2xl">account_circle</span>
+</button>
+</div>
+</div>
+</div></header>
+<div class="flex">
+<!-- SideNavBar -->
+<aside class="flex flex-col h-[calc(100vh-64px)] fixed left-0 top-16 pt-6 pb-8 bg-surface-container-lowest w-64 border-r border-slate-800 z-40 hidden md:flex">
+<div class="px-6 mb-8"><h3 class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-1">Main Menu</h3></div>
+<nav class="flex-1 space-y-1"><a class="bg-primary/10 text-primary border-l-4 border-primary py-3 px-6 flex items-center transition-all duration-200" href="#">
+<span class="material-symbols-outlined mr-3 text-[20px]" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-semibold text-sm">Executive Dashboard</span>
+</a>
+<a class="text-slate-400 py-3 px-6 flex items-center hover:bg-slate-800/50 hover:text-slate-200 transition-all duration-200" href="#">
+<span class="material-symbols-outlined mr-3 text-[20px]">location_city</span>
+<span class="font-medium text-sm">Supplier Directory</span>
+</a>
+<a class="text-slate-400 py-3 px-6 flex items-center hover:bg-slate-800/50 hover:text-slate-200 transition-all duration-200" href="#">
+<span class="material-symbols-outlined mr-3 text-[20px]">crisis_alert</span>
+<span class="font-medium text-sm">Mobile Alerts</span>
+</a>
+<a class="text-slate-400 py-3 px-6 flex items-center hover:bg-slate-800/50 hover:text-slate-200 transition-all duration-200" href="#">
+<span class="material-symbols-outlined mr-3 text-[20px]">assignment_turned_in</span>
+<span class="font-medium text-sm">Audit Reports</span>
+</a>
+<a class="text-slate-400 py-3 px-6 flex items-center hover:bg-slate-800/50 hover:text-slate-200 transition-all duration-200" href="#">
+<span class="material-symbols-outlined mr-3 text-[20px]">settings</span>
+<span class="font-medium text-sm">Settings</span>
+</a></nav>
+<div class="px-4 mt-auto">
+<div class="p-4 bg-slate-800/50 border border-slate-700 rounded-xl">
+<p class="text-[10px] uppercase tracking-wider text-slate-500 mb-1">Portfolio Protection</p>
+<div class="flex items-center justify-between">
+<p class="text-sm font-bold text-white">24/7 Active Shield</p>
+<div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 md:ml-64 p-8 bg-background min-h-[calc(100vh-64px)]">
+<!-- Header Section -->
+<div class="mb-10">
+<h1 class="text-3xl font-bold text-white mb-2">The Bistro Group</h1>
+<p class="text-lg text-slate-400 font-medium">Intelligent Food Safety &amp; Supplier Resilience</p>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-12 gap-6">
+<!-- Hero Metric: Unified Supplier Score -->
+<div class="col-span-12 lg:col-span-8 bg-surface-container border border-outline-variant p-8 rounded-xl flex flex-col relative overflow-hidden">
+<div class="absolute left-0 top-0 h-full w-1 bg-primary"></div>
+<div class="flex justify-between items-start mb-8">
+<div>
+<h2 class="text-2xl font-bold text-white mb-1">Total Portfolio Risk</h2>
+<p class="text-sm text-slate-400">Aggregate health index across 24 managed suppliers</p>
+</div>
+<div class="flex items-center gap-3">
+<span class="bg-green-500/10 text-green-400 text-[10px] font-bold px-2.5 py-1 rounded-full border border-green-500/20">HEALTHY</span>
+<button class="text-primary hover:text-primary-fixed text-sm font-semibold transition-colors">View History</button>
+</div>
+</div>
+<div class="flex flex-col md:flex-row items-center gap-12 py-4">
+<div class="relative flex items-center justify-center w-48 h-48">
+<svg class="w-full h-full transform -rotate-90">
+<circle class="text-slate-800" cx="96" cy="96" fill="transparent" r="88" stroke="currentColor" stroke-width="4"></circle>
+<circle class="text-primary transition-all duration-1000" cx="96" cy="96" fill="transparent" r="88" stroke="currentColor" stroke-dasharray="552.92" stroke-dashoffset="66.35" stroke-linecap="round" stroke-width="8"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-5xl font-extrabold text-white">88</span>
+<span class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-1">Unified Score</span>
+</div>
+</div>
+<div class="flex-1 w-full grid grid-cols-2 gap-4">
+<div class="p-5 bg-surface-container-high border border-outline-variant rounded-xl">
+<p class="text-[10px] text-slate-500 uppercase font-bold mb-2">Critical Faults</p>
+<p class="text-2xl font-bold text-error">02</p>
+<p class="text-[10px] text-error mt-2 flex items-center font-bold"><span class="material-symbols-outlined text-[14px] mr-1">trending_up</span>+1 this month</p>
+</div>
+<div class="p-5 bg-surface-container-high border border-outline-variant rounded-xl">
+<p class="text-[10px] text-slate-500 uppercase font-bold mb-2">Active Audits</p>
+<p class="text-2xl font-bold text-white">05</p>
+<p class="text-[10px] text-primary mt-2 flex items-center font-bold"><span class="material-symbols-outlined text-[14px] mr-1 animate-spin">sync</span>In progress</p>
+</div>
+<div class="p-5 bg-surface-container-high border border-outline-variant rounded-xl">
+<p class="text-[10px] text-slate-500 uppercase font-bold mb-2">Compliance Rate</p>
+<p class="text-2xl font-bold text-white">94.2%</p>
+<p class="text-[10px] text-green-400 mt-2 flex items-center font-bold"><span class="material-symbols-outlined text-[14px] mr-1">verified</span>Above threshold</p>
+</div>
+<div class="p-5 bg-surface-container-high border border-outline-variant rounded-xl">
+<p class="text-[10px] text-slate-500 uppercase font-bold mb-2">Risk Exposure</p>
+<p class="text-2xl font-bold text-tertiary">Low</p>
+<p class="text-[10px] text-slate-500 mt-2 font-medium">Last update: 2h ago</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Compliance Status Card -->
+<div class="col-span-12 lg:col-span-4 bg-surface-container border border-outline-variant p-8 rounded-xl flex flex-col relative">
+<div class="absolute left-0 top-0 h-full w-1 bg-green-500"></div>
+<div class="flex items-center gap-3 mb-8">
+<span class="material-symbols-outlined text-green-400 text-[24px]" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<h3 class="text-xl font-bold text-white">Compliance Status</h3>
+</div>
+<div class="flex-1 flex flex-col justify-center items-center text-center">
+<div class="w-16 h-16 bg-green-500/10 rounded-full flex items-center justify-center mb-4 border border-green-500/20">
+<span class="material-symbols-outlined text-3xl text-green-400">check_circle</span>
+</div>
+<p class="text-xl font-bold text-white mb-2">Audit-Ready</p>
+<p class="text-sm text-slate-400 mb-8 leading-relaxed">Your documentation and supplier trails meet all regulatory standards for the current period.</p>
+<div class="w-full space-y-3">
+<div class="flex justify-between text-[11px] font-bold text-slate-400 border-b border-slate-800 pb-3">
+<span class="uppercase tracking-wider">Health Permit</span>
+<span class="text-green-400">VALID</span>
+</div>
+<div class="flex justify-between text-[11px] font-bold text-slate-400 border-b border-slate-800 pb-3">
+<span class="uppercase tracking-wider">Food Safe Level 2</span>
+<span class="text-green-400">100% STAFF</span>
+</div>
+<div class="flex justify-between text-[11px] font-bold text-slate-400 border-b border-slate-800 pb-3">
+<span class="uppercase tracking-wider">Waste Mgmt.</span>
+<span class="text-green-400">CERTIFIED</span>
+</div>
+</div>
+</div>
+<button class="mt-8 w-full py-3.5 bg-primary text-on-primary font-bold rounded-lg hover:opacity-90 transition-opacity uppercase tracking-widest text-xs">
+                    Download Full Report
+                </button>
+</div>
+<!-- VCH-Fraser Bridge Section (Critical Alerts Feed) -->
+<div class="col-span-12 bg-surface-container border border-outline-variant p-8 rounded-xl">
+<div class="flex justify-between items-center mb-8">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-error text-[24px]" style="font-variation-settings: 'FILL' 1;">warning</span>
+<h3 class="text-xl font-bold text-white">VCH-Fraser Bridge</h3>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-error animate-pulse"></div>
+<span class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Live Monitoring</span>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="text-[10px] font-bold text-slate-500 uppercase tracking-widest border-b border-slate-800">
+<th class="pb-5 font-bold">Source</th>
+<th class="pb-5 font-bold">Supplier/Location</th>
+<th class="pb-5 font-bold">Infraction Details</th>
+<th class="pb-5 font-bold">Date Reported</th>
+<th class="pb-5 font-bold">Status</th>
+<th class="pb-5 font-bold text-right">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-800">
+<tr class="group hover:bg-slate-800/30 transition-colors">
+<td class="py-5">
+<span class="px-2.5 py-1 bg-red-500/10 text-red-400 text-[10px] font-extrabold rounded border border-red-500/20">FRASER HEALTH</span>
+</td>
+<td class="py-5">
+<p class="font-bold text-white">Metro Seafood Distribution</p>
+<p class="text-xs text-slate-500">Burnaby Facility</p>
+</td>
+<td class="py-5 max-w-xs">
+<p class="text-sm font-medium text-slate-300 truncate">Improper temperature storage in cold unit #4B. Repeated violation.</p>
+</td>
+<td class="py-5 text-sm text-slate-500 font-medium">Oct 24, 2023</td>
+<td class="py-5">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-bold bg-amber-500/10 text-amber-400 border border-amber-500/20">
+<span class="w-1.5 h-1.5 rounded-full bg-amber-500 mr-2"></span>
+                                        Review Pending
+                                    </span>
+</td>
+<td class="py-5 text-right">
+<button class="text-primary font-bold text-xs hover:text-white transition-colors uppercase tracking-wider">Quarantine Batch</button>
+</td>
+</tr>
+<tr class="group hover:bg-slate-800/30 transition-colors">
+<td class="py-5">
+<span class="px-2.5 py-1 bg-blue-500/10 text-blue-400 text-[10px] font-extrabold rounded border border-blue-500/20">VCH</span>
+</td>
+<td class="py-5">
+<p class="font-bold text-white">Highland Farms Dairy</p>
+<p class="text-xs text-slate-500">Richmond Hub</p>
+</td>
+<td class="py-5 max-w-xs">
+<p class="text-sm font-medium text-slate-300 truncate">Minor labeling error on pasteurized products batch #902.</p>
+</td>
+<td class="py-5 text-sm text-slate-500 font-medium">Oct 22, 2023</td>
+<td class="py-5">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-bold bg-green-500/10 text-green-400 border border-green-500/20">
+<span class="w-1.5 h-1.5 rounded-full bg-green-500 mr-2"></span>
+                                        Resolved
+                                    </span>
+</td>
+<td class="py-5 text-right">
+<button class="text-slate-500 font-bold text-xs hover:text-slate-300 transition-colors uppercase tracking-wider">View Logs</button>
+</td>
+</tr>
+<tr class="group hover:bg-slate-800/30 transition-colors">
+<td class="py-5">
+<span class="px-2.5 py-1 bg-red-500/10 text-red-400 text-[10px] font-extrabold rounded border border-red-500/20">FRASER HEALTH</span>
+</td>
+<td class="py-5">
+<p class="font-bold text-white">Global Produce Partners</p>
+<p class="text-xs text-slate-500">Surrey Warehouse</p>
+</td>
+<td class="py-5 max-w-xs">
+<p class="text-sm font-medium text-slate-300 truncate">Pest control maintenance records missing for Q3 2023.</p>
+</td>
+<td class="py-5 text-sm text-slate-500 font-medium">Oct 21, 2023</td>
+<td class="py-5">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-bold bg-red-500/10 text-red-400 border border-red-500/20">
+<span class="w-1.5 h-1.5 rounded-full bg-red-500 mr-2 animate-pulse"></span>
+                                        CRITICAL
+                                    </span>
+</td>
+<td class="py-5 text-right">
+<button class="text-primary font-bold text-xs hover:text-white transition-colors uppercase tracking-wider">Re-route Supply</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Visual Asset / Map Integration -->
+<div class="col-span-12 rounded-xl border border-outline-variant overflow-hidden h-72 relative">
+<img alt="Supply Chain Visualization" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCYkzgPMeqCkBmoMk4YmP3F09MnLmXxhDhtA5sfVmuHLjUPYrsHVWCXP0F6V-QPnAr3g_nFUctHyL8pacR9kealu0FCOW8nI0yNbVkJ2jHIi6PmRZft0Q63NgBh8iy9vbZxW81pDSJHc0JRrbMqKGb014puo1yH9OQ1jtjUaQHlRJZZVxIwJqEkRGW8TvVdRvyV_06PiegIDx2GNs0uP2BNv02-GrvZsZIL2ohWEDsSVUnoof1Kp2bYVDjrRcaLv2sCyMC5Z36vi5Ph"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary-container/80 via-primary-container/20 to-transparent"></div>
+<div class="absolute bottom-8 left-8">
+<div class="flex items-center gap-3 mb-2">
+<div class="p-2 bg-primary/20 rounded-lg backdrop-blur-sm border border-primary/30">
+<span class="material-symbols-outlined text-primary text-xl">hub</span>
+</div>
+<p class="text-white font-bold text-2xl">Real-Time Logistics Shield</p>
+</div>
+<p class="text-slate-300 text-sm font-medium">Monitoring 142 active transport routes in the Lower Mainland.</p>
+</div>
+</div>
+</div><footer class="mt-16 pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4 pb-8">
+<div class="flex items-center gap-2 text-slate-500">
+<span class="material-symbols-outlined text-sm">lock</span>
+<span class="text-xs font-semibold uppercase tracking-wider">Encrypted Intelligence</span>
+</div>
+<div class="flex gap-6">
+<a class="text-xs text-slate-500 hover:text-slate-300 transition-colors" href="#">Privacy Policy</a>
+<a class="text-xs text-slate-500 hover:text-slate-300 transition-colors" href="#">Terms of Service</a>
+<a class="text-xs text-slate-500 hover:text-slate-300 transition-colors" href="#">Regulatory Compliance</a>
+</div>
+<p class="text-xs text-slate-600">© 2024 The Bistro Group. Powered by SafeSupply BI.</p>
+</footer>
+</main>
+</div>
+</body></html>

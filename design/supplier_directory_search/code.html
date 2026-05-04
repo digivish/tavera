@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "error": "#ffb4ab",
+                "surface": "#101415",
+                "error-container": "#93000a",
+                "secondary-container": "#3c4a5e",
+                "on-tertiary-container": "#4e3d00",
+                "on-surface-variant": "#c6c6cd",
+                "surface-variant": "#323537",
+                "surface-container": "#1d2022",
+                "outline-variant": "#45464d",
+                "on-primary-container": "#798098",
+                "surface-container-low": "#191c1e",
+                "surface-container-highest": "#323537",
+                "on-error-container": "#ffdad6",
+                "primary": "#bec6e0",
+                "on-tertiary-fixed-variant": "#574500",
+                "on-primary": "#283044",
+                "on-surface": "#e0e3e5",
+                "on-secondary-fixed": "#0d1c2f",
+                "secondary-fixed-dim": "#b9c7e0",
+                "on-secondary-container": "#abb9d2",
+                "on-secondary": "#233144",
+                "surface-dim": "#101415",
+                "inverse-on-surface": "#2d3133",
+                "on-background": "#e0e3e5",
+                "surface-container-lowest": "#0b0f10",
+                "tertiary-fixed": "#ffe088",
+                "inverse-primary": "#565e74",
+                "tertiary-fixed-dim": "#e9c349",
+                "primary-container": "#0f172a",
+                "surface-tint": "#bec6e0",
+                "on-primary-fixed": "#131b2e",
+                "tertiary": "#e9c349",
+                "surface-container-high": "#272a2c",
+                "on-error": "#690005",
+                "secondary": "#b9c7e0",
+                "primary-fixed": "#dae2fd",
+                "background": "#101415",
+                "surface-bright": "#363a3b",
+                "inverse-surface": "#e0e3e5",
+                "on-tertiary-fixed": "#241a00",
+                "primary-fixed-dim": "#bec6e0",
+                "tertiary-container": "#cba72f",
+                "outline": "#909097",
+                "secondary-fixed": "#d5e3fd",
+                "on-tertiary": "#3c2f00",
+                "on-primary-fixed-variant": "#3f465c",
+                "on-secondary-fixed-variant": "#3a485c"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+            },
+            "spacing": {
+                "unit": "4px",
+                "stack-md": "16px",
+                "container-max": "1440px",
+                "gutter": "24px",
+                "stack-sm": "8px",
+                "stack-lg": "32px",
+                "margin": "48px"
+            },
+            "fontFamily": {
+                "display-lg": ["Inter"],
+                "headline-md": ["Inter"],
+                "body-base": ["Inter"],
+                "label-caps": ["Inter"],
+                "data-mono": ["Inter"]
+            },
+            "fontSize": {
+                "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                "body-base": ["16px", {"lineHeight": "24px", "letterSpacing": "0", "fontWeight": "400"}],
+                "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                "data-mono": ["14px", {"lineHeight": "20px", "letterSpacing": "-0.01em", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #101415;
+            color: #e0e3e5;
+        }
+    </style>
+</head>
+<body class="font-body-base text-on-surface antialiased">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center h-16 px-6 w-full sticky top-0 z-50 bg-surface-container border-b border-outline-variant">
+<div class="flex items-center gap-4">
+<span class="text-xl font-bold tracking-tight text-primary">SafeSupply BI</span>
+</div>
+<nav class="flex-1 flex justify-center gap-stack-lg">
+<a class="text-on-surface hover:text-primary font-medium transition-colors" href="#">Executive Dashboard</a>
+<a class="text-primary border-b-2 border-primary font-medium transition-colors" href="#">Supplier Directory</a>
+<a class="text-on-surface hover:text-primary font-medium transition-colors" href="#">Audit Reports</a>
+</nav>
+<div class="flex items-center gap-4"><button class="p-2 text-outline hover:bg-surface-variant transition-colors rounded-lg">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-outline hover:bg-surface-variant transition-colors rounded-lg">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<div class="flex items-center gap-3 ml-2 border-l border-outline-variant pl-4">
+<div class="text-right hidden md:block">
+<p class="text-xs font-semibold text-on-surface">The Bistro Group</p>
+<p class="text-[10px] text-outline uppercase tracking-wider">Owner</p>
+</div>
+<div class="h-8 w-8 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container border border-outline-variant">
+<span class="material-symbols-outlined text-xl">account_circle</span>
+</div>
+</div></div>
+</header>
+<div class="flex">
+<!-- SideNavBar -->
+<aside class="flex flex-col h-[calc(100vh-64px)] fixed left-0 top-16 pt-4 pb-8 w-64 bg-surface-container-low border-r border-outline-variant z-40">
+<div class="px-6 mb-6">
+<p class="text-label-caps uppercase tracking-wider text-outline mb-1">Main Menu</p>
+<p class="text-body-base font-semibold text-primary">Risk Management</p>
+</div>
+<nav class="flex-1 space-y-1"><a class="text-on-surface-variant py-3 px-6 flex items-center hover:bg-surface-variant transition-all duration-200 ease-in-out font-medium" href="#">
+<span class="material-symbols-outlined mr-3">dashboard</span>
+  Executive Dashboard
+</a>
+<a class="bg-primary-container/20 text-primary border-l-4 border-primary py-3 px-6 flex items-center font-medium" href="#">
+<span class="material-symbols-outlined mr-3">location_city</span>
+  Supplier Directory
+</a>
+<a class="text-on-surface-variant py-3 px-6 flex items-center hover:bg-surface-variant transition-all duration-200 ease-in-out font-medium" href="#">
+<span class="material-symbols-outlined mr-3">crisis_alert</span>
+  Mobile Alerts
+</a>
+<a class="text-on-surface-variant py-3 px-6 flex items-center hover:bg-surface-variant transition-all duration-200 ease-in-out font-medium" href="#">
+<span class="material-symbols-outlined mr-3">assignment_turned_in</span>
+  Audit Reports
+</a>
+<div class="mt-auto">
+<a class="text-on-surface-variant py-3 px-6 flex items-center hover:bg-surface-variant transition-all duration-200 ease-in-out font-medium" href="#">
+<span class="material-symbols-outlined mr-3">settings</span>
+    Settings
+  </a>
+</div></nav>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 flex-1 min-h-screen p-gutter">
+<div class="max-w-7xl mx-auto space-y-stack-lg">
+<!-- Header & Filters Section -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-stack-md">
+<div>
+<h1 class="text-display-lg text-on-background mb-1">Supplier Intelligence</h1>
+<p class="text-body-base text-outline">Comprehensive directory of British Columbia food suppliers and risk profiles.</p>
+</div>
+<div class="flex flex-wrap gap-stack-md">
+<button class="flex items-center gap-2 px-4 py-2 border border-outline-variant bg-surface-container rounded-lg text-body-base hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-md">filter_list</span>
+                        Risk Level
+                    </button>
+<button class="flex items-center gap-2 px-4 py-2 border border-outline-variant bg-surface-container rounded-lg text-body-base hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-md">map</span>
+                        Health Authority
+                    </button>
+<button class="flex items-center gap-2 px-4 py-2 bg-primary text-on-primary rounded-lg text-body-base hover:opacity-90 transition-all shadow-lg">
+<span class="material-symbols-outlined text-md">add</span>
+                        Onboard Supplier
+                    </button>
+</div>
+</div>
+<!-- Bento Grid Summary -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter">
+<div class="md:col-span-1 bg-surface-container p-stack-lg rounded-xl border border-outline-variant">
+<p class="text-label-caps text-outline uppercase mb-2">Total Suppliers</p>
+<p class="text-headline-md font-bold text-primary">1,284</p>
+<div class="mt-4 flex items-center text-xs text-secondary">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+<span class="ml-1 font-bold">+12 this month</span>
+</div>
+</div>
+<div class="md:col-span-1 bg-surface-container p-stack-lg rounded-xl border border-outline-variant">
+<p class="text-label-caps text-outline uppercase mb-2">High Risk Flagged</p>
+<p class="text-headline-md font-bold text-error">24</p>
+<div class="mt-4 flex items-center text-xs text-error">
+<span class="material-symbols-outlined text-sm">warning</span>
+<span class="ml-1 font-bold">Action required</span>
+</div>
+</div>
+<div class="md:col-span-2 bg-primary-container p-stack-lg rounded-xl text-on-primary-container flex justify-between items-center overflow-hidden relative border border-outline-variant">
+<div class="z-10">
+<p class="text-label-caps opacity-80 uppercase mb-2">Average Resilience Score</p>
+<p class="text-headline-md font-bold text-primary">82.4%</p>
+<p class="text-body-base opacity-90 mt-2">Regional safety standards are currently optimal.</p>
+</div>
+<img class="h-24 w-32 object-cover rounded opacity-20 absolute right-4 bottom-4 grayscale" data-alt="A futuristic data visualization interface showing complex network nodes and golden percentage charts on a deep indigo digital canvas. The aesthetic is clean and professional, using glowing cyan and sapphire blue accents to highlight key performance metrics in a dark-mode business intelligence environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuByDHyDhjt0jx9BA7uRAvxF71aF6jDXzyfIPiGM-3sLgtaG_iVePBmBhyNbb19J8pdGFO6qg32PQeq0gws7Ro84FhWpA9PGCjPndKMFZuq_MVD0SILcayFIJXeQMYcT_zhFIbpnFMUXM_n7FvjeEvtrwZrxfMxu9iJWUhcrQ0KSDDrEeypWNXvjVIGj0uEN_OIfP24KGFlRKIyCMB53aWjdp-t4CXIj55BaW2RB12-09zlcADy_Xp6H3P0cyoNX3LE_kT8K4yhNrytI"/>
+</div>
+</div>
+<!-- Database Table Section -->
+<div class="bg-surface-container rounded-xl border border-outline-variant overflow-hidden">
+<div class="px-gutter py-stack-md bg-surface-container-high border-b border-outline-variant flex justify-between items-center">
+<h3 class="text-headline-md">Search Results</h3>
+<div class="flex items-center gap-4">
+<span class="text-body-base text-outline">Showing 1-15 of 1,284 results</span>
+<div class="flex border border-outline-variant rounded-lg overflow-hidden">
+<button class="p-2 bg-surface-container hover:bg-surface-variant transition-colors border-r border-outline-variant">
+<span class="material-symbols-outlined text-md">chevron_left</span>
+</button>
+<button class="p-2 bg-surface-container hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-md">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-outline-variant text-label-caps text-outline uppercase bg-surface-container-low">
+<th class="px-gutter py-4 font-semibold">Supplier Legal Name</th>
+<th class="px-gutter py-4 font-semibold">Primary DBA</th>
+<th class="px-gutter py-4 font-semibold">Health Authority</th>
+<th class="px-gutter py-4 font-semibold text-center w-48">Unified Supplier Score</th>
+<th class="px-gutter py-4 font-semibold">Status</th>
+<th class="px-gutter py-4 text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="text-body-base">
+<!-- Row 1 -->
+<tr class="border-b border-surface-variant hover:bg-surface-variant/30 transition-colors">
+<td class="px-gutter py-4">
+<div class="flex flex-col">
+<span class="font-semibold text-on-surface">123456 BC Ltd.</span>
+<span class="text-xs text-outline italic">Incorporated: 2012</span>
+</div>
+</td>
+<td class="px-gutter py-4 text-on-surface-variant">Fraser Valley Logistics</td>
+<td class="px-gutter py-4">
+<span class="inline-flex items-center px-2 py-1 rounded bg-primary/10 text-primary text-xs font-bold border border-primary/20">Fraser Health</span>
+</td>
+<td class="px-gutter py-4">
+<div class="flex items-center gap-3">
+<div class="flex-1 bg-surface-variant h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 88%"></div>
+</div>
+<span class="text-data-mono text-primary font-bold">88%</span>
+</div>
+</td>
+<td class="px-gutter py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-secondary-container/30 text-secondary text-xs font-bold border border-secondary/20">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+                                        Active
+                                    </span>
+</td>
+<td class="px-gutter py-4 text-right">
+<button class="text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="border-b border-surface-variant hover:bg-surface-variant/30 transition-colors">
+<td class="px-gutter py-4">
+<div class="flex flex-col">
+<span class="font-semibold text-on-surface">Oceanic Distribution Corp</span>
+<span class="text-xs text-outline italic">987654 BC Ltd.</span>
+</div>
+</td>
+<td class="px-gutter py-4 text-on-surface-variant">Seafood Direct</td>
+<td class="px-gutter py-4">
+<span class="inline-flex items-center px-2 py-1 rounded bg-surface-variant text-on-surface-variant text-xs font-bold border border-outline-variant">VCH</span>
+</td>
+<td class="px-gutter py-4">
+<div class="flex items-center gap-3">
+<div class="flex-1 bg-surface-variant h-2 rounded-full overflow-hidden">
+<div class="bg-tertiary h-full rounded-full" style="width: 62%"></div>
+</div>
+<span class="text-data-mono text-tertiary font-bold">62%</span>
+</div>
+</td>
+<td class="px-gutter py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-tertiary-container/20 text-tertiary text-xs font-bold border border-tertiary/20">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+                                        Audit Pending
+                                    </span>
+</td>
+<td class="px-gutter py-4 text-right">
+<button class="text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="border-b border-surface-variant hover:bg-surface-variant/30 transition-colors">
+<td class="px-gutter py-4">
+<div class="flex flex-col">
+<span class="font-semibold text-on-surface">North Delta Poultry</span>
+<span class="text-xs text-outline italic">556677 BC Ltd.</span>
+</div>
+</td>
+<td class="px-gutter py-4 text-on-surface-variant">Delta Fresh Farms</td>
+<td class="px-gutter py-4">
+<span class="inline-flex items-center px-2 py-1 rounded bg-primary/10 text-primary text-xs font-bold border border-primary/20">Fraser Health</span>
+</td>
+<td class="px-gutter py-4">
+<div class="flex items-center gap-3">
+<div class="flex-1 bg-surface-variant h-2 rounded-full overflow-hidden">
+<div class="bg-error h-full rounded-full" style="width: 34%"></div>
+</div>
+<span class="text-data-mono text-error font-bold">34%</span>
+</div>
+</td>
+<td class="px-gutter py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-error-container/20 text-error text-xs font-bold border border-error/20">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+                                        Critical Flag
+                                    </span>
+</td>
+<td class="px-gutter py-4 text-right">
+<button class="text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="border-b border-surface-variant hover:bg-surface-variant/30 transition-colors">
+<td class="px-gutter py-4">
+<div class="flex flex-col">
+<span class="font-semibold text-on-surface">Mountain Range Meats</span>
+<span class="text-xs text-outline italic">443322 BC Ltd.</span>
+</div>
+</td>
+<td class="px-gutter py-4 text-on-surface-variant">BC Prime Cuts</td>
+<td class="px-gutter py-4">
+<span class="inline-flex items-center px-2 py-1 rounded bg-surface-variant text-on-surface-variant text-xs font-bold border border-outline-variant">Interior Health</span>
+</td>
+<td class="px-gutter py-4">
+<div class="flex items-center gap-3">
+<div class="flex-1 bg-surface-variant h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 95%"></div>
+</div>
+<span class="text-data-mono text-primary font-bold">95%</span>
+</div>
+</td>
+<td class="px-gutter py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-secondary-container/30 text-secondary text-xs font-bold border border-secondary/20">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+                                        Active
+                                    </span>
+</td>
+<td class="px-gutter py-4 text-right">
+<button class="text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-surface-variant/30 transition-colors">
+<td class="px-gutter py-4">
+<div class="flex flex-col">
+<span class="font-semibold text-on-surface">Mainland Produce Grp</span>
+<span class="text-xs text-outline italic">112233 BC Ltd.</span>
+</div>
+</td>
+<td class="px-gutter py-4 text-on-surface-variant">Mainland Harvest</td>
+<td class="px-gutter py-4">
+<span class="inline-flex items-center px-2 py-1 rounded bg-surface-variant text-on-surface-variant text-xs font-bold border border-outline-variant">VCH</span>
+</td>
+<td class="px-gutter py-4">
+<div class="flex items-center gap-3">
+<div class="flex-1 bg-surface-variant h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 81%"></div>
+</div>
+<span class="text-data-mono text-primary font-bold">81%</span>
+</div>
+</td>
+<td class="px-gutter py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-secondary-container/30 text-secondary text-xs font-bold border border-secondary/20">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+                                        Active
+                                    </span>
+</td>
+<td class="px-gutter py-4 text-right">
+<button class="text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Footer Pagination & View Options -->
+<footer class="flex flex-col md:flex-row justify-between items-center px-gutter py-stack-md border-t border-outline-variant bg-surface-container-low mt-stack-lg rounded-xl">
+<div class="flex items-center gap-4 text-body-base text-outline">
+<span>Rows per page:</span>
+<select class="bg-surface-container border border-outline-variant rounded px-2 py-1 text-on-surface">
+<option>15</option>
+<option>30</option>
+<option>50</option>
+</select>
+<span class="ml-4">1-15 of 1,284 results</span>
+</div>
+<div class="flex items-center gap-1">
+<button class="p-2 text-outline hover:text-primary transition-colors disabled:opacity-30" disabled=""><span class="material-symbols-outlined">first_page</span></button>
+<button class="p-2 text-outline hover:text-primary transition-colors disabled:opacity-30" disabled=""><span class="material-symbols-outlined">chevron_left</span></button>
+<div class="flex items-center mx-2">
+<button class="w-8 h-8 flex items-center justify-center bg-primary text-on-primary rounded font-bold shadow-sm">1</button>
+<button class="w-8 h-8 flex items-center justify-center hover:bg-surface-variant rounded transition-colors text-on-surface">2</button>
+<button class="w-8 h-8 flex items-center justify-center hover:bg-surface-variant rounded transition-colors text-on-surface">3</button>
+<span class="px-2 text-outline">...</span>
+<button class="w-8 h-8 flex items-center justify-center hover:bg-surface-variant rounded transition-colors text-on-surface">86</button>
+</div>
+<button class="p-2 text-outline hover:text-primary transition-colors"><span class="material-symbols-outlined">chevron_right</span></button>
+<button class="p-2 text-outline hover:text-primary transition-colors"><span class="material-symbols-outlined">last_page</span></button>
+</div>
+</footer>
+</div>
+</main>
+</div>
+</body></html>

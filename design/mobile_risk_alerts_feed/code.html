@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "error": "#ffb4ab",
+                "surface": "#101415",
+                "error-container": "#93000a",
+                "secondary-container": "#3c4a5e",
+                "on-tertiary-container": "#4e3d00",
+                "on-surface-variant": "#c6c6cd",
+                "surface-variant": "#323537",
+                "surface-container": "#1d2022",
+                "outline-variant": "#45464d",
+                "on-primary-container": "#798098",
+                "surface-container-low": "#191c1e",
+                "surface-container-highest": "#323537",
+                "on-error-container": "#ffdad6",
+                "primary": "#bec6e0",
+                "on-tertiary-fixed-variant": "#574500",
+                "on-primary": "#283044",
+                "on-surface": "#e0e3e5",
+                "on-secondary-fixed": "#0d1c2f",
+                "secondary-fixed-dim": "#b9c7e0",
+                "on-secondary-container": "#abb9d2",
+                "on-secondary": "#233144",
+                "surface-dim": "#101415",
+                "inverse-on-surface": "#2d3133",
+                "on-background": "#e0e3e5",
+                "surface-container-lowest": "#0b0f10",
+                "tertiary-fixed": "#ffe088",
+                "inverse-primary": "#565e74",
+                "tertiary-fixed-dim": "#e9c349",
+                "primary-container": "#0f172a",
+                "surface-tint": "#bec6e0",
+                "on-primary-fixed": "#131b2e",
+                "tertiary": "#e9c349",
+                "surface-container-high": "#272a2c",
+                "on-error": "#690005",
+                "secondary": "#b9c7e0",
+                "primary-fixed": "#dae2fd",
+                "background": "#101415",
+                "surface-bright": "#363a3b",
+                "inverse-surface": "#e0e3e5",
+                "on-tertiary-fixed": "#241a00",
+                "primary-fixed-dim": "#bec6e0",
+                "tertiary-container": "#cba72f",
+                "outline": "#909097",
+                "secondary-fixed": "#d5e3fd",
+                "on-tertiary": "#3c2f00",
+                "on-primary-fixed-variant": "#3f465c",
+                "on-secondary-fixed-variant": "#3a485c"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+        },
+        "spacing": {
+                "unit": "4px",
+                "stack-md": "16px",
+                "container-max": "1440px",
+                "gutter": "24px",
+                "stack-sm": "8px",
+                "stack-lg": "32px",
+                "margin": "48px"
+        },
+        "fontFamily": {
+                "display-lg": [
+                        "Inter"
+                ],
+                "headline-md": [
+                        "Inter"
+                ],
+                "body-base": [
+                        "Inter"
+                ],
+                "label-caps": [
+                        "Inter"
+                ],
+                "data-mono": [
+                        "Inter"
+                ]
+        },
+        "fontSize": {
+                "display-lg": [
+                        "48px",
+                        {
+                                "lineHeight": "56px",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "700"
+                        }
+                ],
+                "headline-md": [
+                        "24px",
+                        {
+                                "lineHeight": "32px",
+                                "letterSpacing": "-0.01em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "body-base": [
+                        "16px",
+                        {
+                                "lineHeight": "24px",
+                                "letterSpacing": "0",
+                                "fontWeight": "400"
+                        }
+                ],
+                "label-caps": [
+                        "12px",
+                        {
+                                "lineHeight": "16px",
+                                "letterSpacing": "0.05em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "data-mono": [
+                        "14px",
+                        {
+                                "lineHeight": "20px",
+                                "letterSpacing": "-0.01em",
+                                "fontWeight": "500"
+                        }
+                ]
+        }
+},
+    },
+  }
+</script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .risk-card-border-red { border-left: 4px solid #ffb4ab; }
+        .risk-card-border-amber { border-left: 4px solid #e9c349; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-surface font-body-base text-on-surface antialiased">
+<header class="bg-surface-container border-b border-outline-variant flex justify-between items-center h-16 px-6 w-full sticky top-0 z-50">
+<div class="flex items-center gap-stack-sm">
+<span class="text-xl font-bold tracking-tight text-primary">SafeSupply BI</span>
+</div>
+<div class="flex items-center gap-stack-sm">
+<button class="hover:bg-surface-variant transition-colors p-2 rounded-lg">
+<span class="material-symbols-outlined text-primary" data-icon="notifications">notifications</span>
+</button>
+<button class="hover:bg-surface-variant transition-colors p-2 rounded-lg">
+<span class="material-symbols-outlined text-primary" data-icon="help_outline">help_outline</span>
+</button>
+<span class="hidden sm:inline text-label-caps text-on-surface-variant mr-2">The Bistro Group</span><button class="hover:bg-surface-variant transition-colors p-2 rounded-lg">
+<span class="material-symbols-outlined text-primary" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</header>
+<div class="flex">
+<aside class="hidden md:flex flex-col h-screen w-64 border-r border-outline-variant bg-surface-container-low fixed left-0 top-16 pt-4 pb-8">
+<div class="px-6 mb-stack-lg">
+<h2 class="text-headline-md text-primary">Main Menu</h2>
+<p class="text-label-caps text-on-surface-variant">Risk Management</p>
+</div>
+<nav class="flex flex-col">
+<a class="text-on-surface-variant py-3 px-4 flex items-center hover:bg-surface-variant transition-all duration-200" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="dashboard">dashboard</span>
+<span class="font-medium text-body-base">Executive Dashboard</span>
+</a>
+<a class="text-on-surface-variant py-3 px-4 flex items-center hover:bg-surface-variant transition-all duration-200" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="location_city">location_city</span>
+<span class="font-medium text-body-base">Supplier Directory</span>
+</a>
+<a class="bg-primary-container text-primary border-l-4 border-primary py-3 px-4 flex items-center transition-all duration-200" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="crisis_alert" style="font-variation-settings: 'FILL' 1;">crisis_alert</span>
+<span class="font-medium text-body-base">Mobile Alerts</span>
+</a>
+<a class="text-on-surface-variant py-3 px-4 flex items-center hover:bg-surface-variant transition-all duration-200" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="assignment_turned_in">assignment_turned_in</span>
+<span class="font-medium text-body-base">Audit Reports</span>
+</a>
+<a class="text-on-surface-variant py-3 px-4 flex items-center hover:bg-surface-variant transition-all duration-200 mt-auto" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="settings">settings</span>
+<span class="font-medium text-body-base">Settings</span>
+</a>
+</nav>
+</aside>
+<main class="flex-1 md:ml-64 p-gutter md:p-margin bg-background min-h-screen">
+<div class="max-w-3xl mx-auto">
+<header class="mb-stack-lg flex items-center justify-between">
+<div>
+<h1 class="text-display-lg text-on-background">Real-Time Risk Feed</h1>
+<p class="text-body-base text-on-surface-variant">Live monitoring for Tavera watched vendors.</p>
+</div>
+<div class="flex bg-surface-container p-stack-sm rounded-lg border border-outline-variant">
+<span class="material-symbols-outlined text-primary" data-icon="wifi_tethering">wifi_tethering</span>
+<span class="ml-2 text-label-caps text-primary uppercase">Live</span>
+</div>
+</header>
+<div class="space-y-stack-md">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl risk-card-border-red shadow-sm overflow-hidden">
+<div class="p-gutter">
+<div class="flex justify-between items-start mb-stack-md">
+<div>
+<h3 class="text-headline-md text-on-background">Artisan Bakery Collective</h3>
+<div class="flex items-center mt-unit gap-stack-sm">
+<span class="material-symbols-outlined text-error text-[18px]" data-icon="gavel" style="font-variation-settings: 'FILL' 1;">gavel</span>
+<span class="text-error text-data-mono uppercase tracking-wider">Closure Order Issued</span>
+</div>
+</div>
+<div class="bg-error-container px-stack-sm py-unit rounded text-on-error-container flex items-center gap-unit">
+<span class="material-symbols-outlined text-[16px]" data-icon="warning">warning</span>
+<span class="text-label-caps uppercase">CRITICAL</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-stack-lg mb-stack-lg">
+<div>
+<p class="text-label-caps text-outline uppercase mb-1">Health Authority</p>
+<p class="text-body-base text-on-surface">NYC Dept of Health &amp; Mental Hygiene</p>
+</div>
+<div>
+<p class="text-label-caps text-outline uppercase mb-1">Infraction Date</p>
+<p class="text-body-base text-on-surface">October 24, 2023 • 14:22 EST</p>
+</div>
+</div>
+<div class="flex gap-stack-md border-t border-outline-variant pt-gutter">
+<button class="flex-1 bg-primary text-on-primary py-stack-sm rounded-lg text-label-caps uppercase tracking-widest hover:opacity-90 transition-all">
+                                    View Details
+                                </button>
+<button class="px-stack-md border border-outline text-on-surface-variant rounded-lg flex items-center justify-center hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined" data-icon="share">share</span>
+</button>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl risk-card-border-amber shadow-sm overflow-hidden">
+<div class="p-gutter">
+<div class="flex justify-between items-start mb-stack-md">
+<div>
+<h3 class="text-headline-md text-on-background">Oceanic Fresh Seafoods</h3>
+<div class="flex items-center mt-unit gap-stack-sm">
+<span class="material-symbols-outlined text-tertiary text-[18px]" data-icon="report_problem" style="font-variation-settings: 'FILL' 1;">report_problem</span>
+<span class="text-tertiary text-data-mono uppercase tracking-wider">Temperature Violation</span>
+</div>
+</div>
+<div class="bg-tertiary-container px-stack-sm py-unit rounded text-on-tertiary-container flex items-center gap-unit">
+<span class="material-symbols-outlined text-[16px]" data-icon="error_outline">error_outline</span>
+<span class="text-label-caps uppercase">ALERT</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-stack-lg mb-stack-lg">
+<div>
+<p class="text-label-caps text-outline uppercase mb-1">Health Authority</p>
+<p class="text-body-base text-on-surface">California Food Safety Board</p>
+</div>
+<div>
+<p class="text-label-caps text-outline uppercase mb-1">Infraction Date</p>
+<p class="text-body-base text-on-surface">October 24, 2023 • 11:05 PST</p>
+</div>
+</div>
+<div class="flex gap-stack-md border-t border-outline-variant pt-gutter">
+<button class="flex-1 bg-primary text-on-primary py-stack-sm rounded-lg text-label-caps uppercase tracking-widest hover:opacity-90 transition-all">
+                                    View Details
+                                </button>
+<button class="px-stack-md border border-outline text-on-surface-variant rounded-lg flex items-center justify-center hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined" data-icon="share">share</span>
+</button>
+</div>
+</div>
+</div>
+<div class="bg-surface-container rounded-xl overflow-hidden border border-outline-variant shadow-lg relative h-48 group">
+<img alt="Operations Center" class="w-full h-full object-cover grayscale opacity-10" data-alt="A high-tech supply chain operations center featuring wide-screen monitors displaying complex data visualizations and logistics maps. The room is styled with a sleek corporate minimalism, predominantly in shades of slate and professional navy blue. Soft ambient overhead lighting casts a clean, analytical mood over the rows of workstations. The overall aesthetic is one of institutional transparency and data-driven intelligence." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQektTk2-zJcaYC5ceDNSuGXWXQx95iY8YHYPUhEbePV-r4iG9dxNd-Rvp0796lANGXGHVgrRiLvxyKzyGpO0mE5a6O-gYHu2lEIheVMvQ7ayQQrg6VZ8j-6W56zFz-W838N1H6OwQCUItFrjqWvHwo92brJX-2fz_etu8NMUFkeRLNyPBfHfF54_TW5oqAJHk-kpp2nhhv2HlfW4cNLanWV1-ffLY6LhVXgx1v_qn1t1JsyVPK1NySAfnogO4AZLhdSKIBP--g9pV"/>
+<div class="absolute inset-0 flex flex-col items-center justify-center text-center p-gutter bg-gradient-to-t from-surface to-transparent">
+<h4 class="text-headline-md text-primary mb-1">Audit Trail Active</h4>
+<p class="text-body-base text-on-surface-variant px-stack-lg">Monitoring 422 vendors in the Northeast corridor with 0.4s latency.</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl risk-card-border-red shadow-sm overflow-hidden">
+<div class="p-gutter">
+<div class="flex justify-between items-start mb-stack-md">
+<div>
+<h3 class="text-headline-md text-on-background">Valley Greens Produce</h3>
+<div class="flex items-center mt-unit gap-stack-sm">
+<span class="material-symbols-outlined text-error text-[18px]" data-icon="coronavirus" style="font-variation-settings: 'FILL' 1;">coronavirus</span>
+<span class="text-error text-data-mono uppercase tracking-wider">Pathogen Alert (Listeria)</span>
+</div>
+</div>
+<div class="bg-error-container px-stack-sm py-unit rounded text-on-error-container flex items-center gap-unit">
+<span class="material-symbols-outlined text-[16px]" data-icon="warning">warning</span>
+<span class="text-label-caps uppercase">CRITICAL</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-stack-lg mb-stack-lg">
+<div>
+<p class="text-label-caps text-outline uppercase mb-1">Health Authority</p>
+<p class="text-body-base text-on-surface">FDA Compliance Office</p>
+</div>
+<div>
+<p class="text-label-caps text-outline uppercase mb-1">Infraction Date</p>
+<p class="text-body-base text-on-surface">October 23, 2023 • 23:45 EST</p>
+</div>
+</div>
+<div class="flex gap-stack-md border-t border-outline-variant pt-gutter">
+<button class="flex-1 bg-primary text-on-primary py-stack-sm rounded-lg text-label-caps uppercase tracking-widest hover:opacity-90 transition-all">
+                                    View Details
+                                </button>
+<button class="px-stack-md border border-outline text-on-surface-variant rounded-lg flex items-center justify-center hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined" data-icon="share">share</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-stack-lg text-center pb-margin">
+<button class="text-primary text-label-caps flex items-center justify-center gap-stack-sm mx-auto hover:underline uppercase tracking-widest">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+                        Load Historical Alerts
+                    </button>
+</div>
+</div>
+</main>
+</div>
+<nav class="md:hidden fixed bottom-0 left-0 right-0 bg-surface-container border-t border-outline-variant z-50 flex justify-around items-center h-16 px-gutter">
+<button class="flex flex-col items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-[10px] font-medium uppercase tracking-tight">Dashboard</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="location_city">location_city</span>
+<span class="text-[10px] font-medium uppercase tracking-tight">Vendors</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-primary">
+<span class="material-symbols-outlined" data-icon="crisis_alert" style="font-variation-settings: 'FILL' 1;">crisis_alert</span>
+<span class="text-[10px] font-medium uppercase tracking-tight">Alerts</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="assignment_turned_in">assignment_turned_in</span>
+<span class="text-[10px] font-medium uppercase tracking-tight">Audits</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-[10px] font-medium uppercase tracking-tight">Menu</span>
+</button>
+</nav>
+</body></html>

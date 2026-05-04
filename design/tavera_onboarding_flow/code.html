@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "on-tertiary-fixed-variant": "#574500",
+                "primary-fixed-dim": "#bec6e0",
+                "on-primary-fixed-variant": "#3f465c",
+                "error-container": "#93000a",
+                "secondary": "#b9c7e0",
+                "error": "#ffb4ab",
+                "primary-container": "#0f172a",
+                "surface-bright": "#363a3b",
+                "on-error-container": "#ffdad6",
+                "outline-variant": "#45464d",
+                "surface-container": "#1d2022",
+                "primary": "#bec6e0",
+                "on-surface": "#e0e3e5",
+                "on-secondary-fixed": "#0d1c2f",
+                "surface-variant": "#323537",
+                "inverse-primary": "#565e74",
+                "background": "#101415",
+                "surface-container-high": "#272a2c",
+                "surface-container-low": "#191c1e",
+                "on-secondary-fixed-variant": "#3a485c",
+                "secondary-container": "#3c4a5e",
+                "on-background": "#e0e3e5",
+                "secondary-fixed-dim": "#b9c7e0",
+                "outline": "#909097",
+                "secondary-fixed": "#d5e3fd",
+                "on-tertiary-container": "#4e3d00",
+                "tertiary": "#e9c349",
+                "inverse-surface": "#e0e3e5",
+                "on-surface-variant": "#c6c6cd",
+                "on-primary-container": "#798098",
+                "tertiary-container": "#cba72f",
+                "surface": "#101415",
+                "on-primary-fixed": "#131b2e",
+                "primary-fixed": "#dae2fd",
+                "on-error": "#690005",
+                "tertiary-fixed-dim": "#e9c349",
+                "inverse-on-surface": "#2d3133",
+                "on-tertiary-fixed": "#241a00",
+                "surface-tint": "#bec6e0",
+                "on-tertiary": "#3c2f00",
+                "on-primary": "#283044",
+                "surface-container-highest": "#323537",
+                "on-secondary": "#233144",
+                "surface-container-lowest": "#0b0f10",
+                "on-secondary-container": "#abb9d2",
+                "surface-dim": "#101415",
+                "tertiary-fixed": "#ffe088"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+            },
+            "spacing": {
+                "stack-md": "16px",
+                "container-max": "1440px",
+                "stack-sm": "8px",
+                "unit": "4px",
+                "stack-lg": "32px",
+                "gutter": "24px",
+                "margin": "48px"
+            },
+            "fontFamily": {
+                "label-caps": ["Inter"],
+                "body-base": ["Inter"],
+                "data-mono": ["Inter"],
+                "headline-md": ["Inter"],
+                "display-lg": ["Inter"]
+            },
+            "fontSize": {
+                "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                "body-base": ["16px", {"lineHeight": "24px", "letterSpacing": "0", "fontWeight": "400"}],
+                "data-mono": ["14px", {"lineHeight": "20px", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+                "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+      body {
+        background-color: #020617;
+        color: #e0e3e5;
+        font-family: 'Inter', sans-serif;
+      }
+      .glass-card {
+        background: rgba(15, 23, 42, 0.6);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(30, 41, 59, 0.5);
+      }
+      .step-active {
+        color: #e9c349;
+        border-color: #e9c349;
+      }
+      .step-inactive {
+        color: #45464d;
+        border-color: #45464d;
+      }
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+<!-- TopNavBar Strategy: Hidden on Focused Onboarding -->
+<header class="w-full fixed top-0 z-50 bg-slate-950/80 backdrop-blur-md border-b border-slate-800/50">
+<div class="max-w-7xl mx-auto px-8 py-4 flex justify-between items-center">
+<div class="text-2xl font-bold tracking-tighter text-slate-50">Tavera</div>
+<div class="flex items-center gap-stack-md">
+<span class="font-label-caps text-label-caps text-slate-500 uppercase">Onboarding Progress</span>
+<div class="w-48 h-1 bg-slate-800 rounded-full overflow-hidden">
+<div class="w-1/2 h-full bg-tertiary"></div>
+</div>
+<button class="font-label-caps text-label-caps text-slate-400 hover:text-slate-100 transition-colors uppercase">Save &amp; Exit</button>
+</div>
+</div>
+</header>
+<main class="flex-grow flex items-center justify-center pt-24 pb-12 px-gutter">
+<div class="w-full max-w-5xl grid grid-cols-1 md:grid-cols-12 gap-stack-lg items-start">
+<!-- Progress Sidebar (Asymmetric Layout) -->
+<div class="md:col-span-3 space-y-stack-lg">
+<div class="space-y-stack-md">
+<div class="flex items-center gap-stack-sm text-tertiary">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-label-caps text-label-caps uppercase tracking-widest">Completed</span>
+</div>
+<div class="pl-stack-md border-l-2 border-slate-800">
+<h3 class="font-headline-md text-data-mono text-slate-100">Account Setup</h3>
+<p class="font-body-base text-xs text-slate-500">The Bistro Group</p>
+</div>
+</div>
+<div class="space-y-stack-md">
+<div class="flex items-center gap-stack-sm text-tertiary">
+<span class="material-symbols-outlined text-sm">radio_button_checked</span>
+<span class="font-label-caps text-label-caps uppercase tracking-widest text-tertiary">Current Step</span>
+</div>
+<div class="pl-stack-md border-l-2 border-tertiary">
+<h3 class="font-headline-md text-data-mono text-slate-100">Business Discovery</h3>
+<p class="font-body-base text-xs text-slate-400">License &amp; Legal Verification</p>
+</div>
+</div>
+<div class="space-y-stack-md opacity-40">
+<div class="flex items-center gap-stack-sm text-slate-600">
+<span class="material-symbols-outlined text-sm">radio_button_unchecked</span>
+<span class="font-label-caps text-label-caps uppercase tracking-widest">Step 3</span>
+</div>
+<div class="pl-stack-md border-l-2 border-slate-800">
+<h3 class="font-headline-md text-data-mono text-slate-400">Supplier Inventory</h3>
+</div>
+</div>
+<div class="space-y-stack-md opacity-40">
+<div class="flex items-center gap-stack-sm text-slate-600">
+<span class="material-symbols-outlined text-sm">radio_button_unchecked</span>
+<span class="font-label-caps text-label-caps uppercase tracking-widest">Step 4</span>
+</div>
+<div class="pl-stack-md border-l-2 border-slate-800">
+<h3 class="font-headline-md text-data-mono text-slate-400">Monitoring Setup</h3>
+</div>
+</div>
+</div>
+<!-- Main Content Canvas (Bento Style) -->
+<div class="md:col-span-9 space-y-stack-lg">
+<header class="space-y-stack-sm">
+<h1 class="font-display-lg text-display-lg text-slate-50">Link Your Business Identity</h1>
+<p class="font-body-base text-body-base text-slate-400 max-w-2xl">We synchronize with global government registries via OrgBook to automatically verify your food safety credentials and business status.</p>
+</header>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
+<!-- Verification Card -->
+<div class="glass-card p-stack-lg rounded-xl col-span-2 md:col-span-1 flex flex-col justify-between">
+<div class="space-y-stack-md">
+<div class="w-12 h-12 bg-tertiary-container/20 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary">account_balance</span>
+</div>
+<div>
+<h4 class="font-headline-md text-data-mono text-slate-100">OrgBook Integration</h4>
+<p class="font-body-base text-sm text-slate-500 mt-unit">Securely link your provincial or state business license for instant verification.</p>
+</div>
+</div>
+<div class="mt-stack-lg">
+<label class="font-label-caps text-label-caps text-slate-400 uppercase mb-unit block">Business Number (BN)</label>
+<div class="relative">
+<input class="w-full bg-slate-900/50 border border-slate-800 rounded-lg py-3 px-4 text-slate-100 focus:outline-none focus:border-tertiary transition-colors" placeholder="e.g. 12345 6789 BC0001" type="text"/>
+<button class="absolute right-2 top-2 bg-tertiary text-on-tertiary font-label-caps text-xs px-3 py-1.5 rounded-md hover:bg-tertiary-fixed transition-all">Verify</button>
+</div>
+</div>
+</div>
+<!-- Visual Feedback / Info Card -->
+<div class="glass-card rounded-xl overflow-hidden relative col-span-2 md:col-span-1">
+<img class="w-full h-full object-cover opacity-50" data-alt="A macro cinematic shot of a digital translucent identity card floating in a dark server room environment. The card displays a stylized 'Verified' checkmark and glowing data streams in gold and slate blue. Soft bokeh lights from server racks twinkle in the background, creating a high-tech, secure, and professional atmosphere for a food safety intelligence platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJNiEOFfQ0y69Ej-1ObbWZv4_Uu_cZ4eBLNPoBjPITnCvguMICVhPtvK_RfEdNlDIvH57XP0iF8oXb0gLAHLg8xGtAsMgDijOaLV0DRXK670uhunEMAZUbJuyaw529zC-ILyLcZA62GKxHJtc4-LoVewyaU_tPh8Cdv9q4mE2a33LLpfEJ7-BRr7rZ3-iz5kNynMUG2T-DwgbcF8XLFgpkAf83kcH04Z4Wo7o3h8KCwldU-lghMSuUzk0kFMoG17IIl2EzSm5hT1ZU"/>
+<div class="absolute inset-0 bg-gradient-to-t from-[#020617] via-transparent to-transparent p-stack-lg flex flex-col justify-end">
+<div class="bg-slate-900/80 backdrop-blur-md p-stack-md rounded-lg border border-slate-700/50">
+<div class="flex items-center gap-stack-sm mb-unit">
+<span class="material-symbols-outlined text-emerald-500 text-sm" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="font-label-caps text-xs text-emerald-500 uppercase">Trust Network Active</span>
+</div>
+<p class="text-xs text-slate-400">Verifying with OrgBook reduces manual document submission by 85%.</p>
+</div>
+</div>
+</div>
+<!-- Manual Upload Option (Secondary) -->
+<div class="glass-card p-stack-lg rounded-xl col-span-2">
+<div class="flex flex-col md:flex-row items-center justify-between gap-stack-md">
+<div class="flex items-start gap-stack-md">
+<div class="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-slate-400">upload_file</span>
+</div>
+<div>
+<h5 class="font-headline-md text-body-base font-semibold text-slate-200">Can't find your business?</h5>
+<p class="font-body-base text-sm text-slate-500">Upload your business license or registration PDF manually for our analysts to review.</p>
+</div>
+</div>
+<button class="px-6 py-2.5 border border-slate-700 text-slate-300 font-label-caps text-label-caps uppercase rounded-lg hover:bg-slate-800 transition-all">Upload Document</button>
+</div>
+</div>
+</div>
+<!-- Footer Navigation within Canvas -->
+<footer class="flex items-center justify-between pt-stack-lg border-t border-slate-800/50">
+<button class="flex items-center gap-stack-sm text-slate-500 hover:text-slate-200 transition-colors">
+<span class="material-symbols-outlined text-lg">arrow_back</span>
+<span class="font-label-caps text-label-caps uppercase">Previous: Account</span>
+</button>
+<div class="flex items-center gap-stack-md">
+<span class="font-body-base text-xs text-slate-600">Step 2 of 4</span>
+<button class="bg-tertiary text-on-tertiary px-10 py-3 rounded-lg font-label-caps text-label-caps uppercase tracking-widest shadow-xl shadow-tertiary/10 hover:scale-105 active:scale-95 transition-all">
+                            Continue to Suppliers
+                        </button>
+</div>
+</footer>
+</div>
+</div>
+</main>
+<!-- Shared Footer Strategy: Minimal for Onboarding -->
+<footer class="w-full bg-[#020617] border-t border-slate-900 mt-auto">
+<div class="max-w-7xl mx-auto px-8 py-12 flex flex-col md:flex-row justify-between items-center gap-stack-md">
+<div class="text-slate-200 font-semibold tracking-tighter">Tavera Intelligence</div>
+<div class="text-slate-500 font-inter text-xs uppercase tracking-widest text-center md:text-left">
+                © 2024 Tavera Intelligence. All rights reserved. Precision in Food Safety.
+            </div>
+<div class="flex gap-stack-lg">
+<a class="text-slate-500 hover:text-slate-300 font-inter text-xs uppercase tracking-widest transition-all" href="#">Privacy Policy</a>
+<a class="text-slate-500 hover:text-slate-300 font-inter text-xs uppercase tracking-widest transition-all" href="#">Global Standards</a>
+</div>
+</div>
+</footer>
+</body></html>
