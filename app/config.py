@@ -5,7 +5,7 @@ class Settings(BaseSettings):
     model_config = {"env_file": ".env", "extra": "ignore"}
 
     # Database
-    database_url: str = "postgresql+asyncpg://postgres:postgres@localhost:5432/tavera"
+    database_url: str = "sqlite+aiosqlite:///tavera.db"
 
     # BC Government APIs
     orgbook_bc_api_url: str = "https://orgbook.gov.bc.ca/api/v4"
@@ -29,6 +29,9 @@ class Settings(BaseSettings):
 
     # Sentry
     sentry_dsn: str = ""
+
+    # CORS
+    cors_origins: list[str] = ["http://localhost:5173"]
 
 
 settings = Settings()

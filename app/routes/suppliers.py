@@ -4,6 +4,7 @@ from uuid import UUID, uuid4
 
 from fastapi import APIRouter, Depends, File, HTTPException, Query, UploadFile
 from sqlalchemy import func, select
+from sqlalchemy.orm import selectinload
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.adapters.fraser_health import FraserHealthAdapter
@@ -86,13 +87,37 @@ async def list_suppliers(
     )
 
 
+@router.get("/compare")
+async def compare_suppliers(
+    ids: str = Query(description="Comma-separated supplier UUIDs, max 4"),
+    db: AsyncSession = Depends(get_db),
+    _api_key: ApiKeyAuth = None,
+):
+    id_list = [UUID(i.strip()) for i in ids.split(",") if i.strip()]
+    if len(id_list) > 4:
+        raise HTTPException(status_code=422, detail="Maximum 4 suppliers for comparison")
+
+    result = await db.execute(select(Supplier).where(Supplier.id.in_(id_list)).options(selectinload(Supplier.infractions)))
+    suppliers = result.scalars().all()
+
+    return {
+        "suppliers": [
+            {
+                **SupplierDetail.model_validate(s).model_dump(),
+                "risk_level": score_to_risk_level(s.unified_score),
+            }
+            for s in suppliers
+        ]
+    }
+
+
 @router.get("/{supplier_id}", response_model=SupplierDetail)
 async def get_supplier(
     supplier_id: UUID,
     db: AsyncSession = Depends(get_db),
     _api_key: ApiKeyAuth = None,
 ):
-    result = await db.execute(select(Supplier).where(Supplier.id == supplier_id))
+    result = await db.execute(select(Supplier).where(Supplier.id == supplier_id).options(selectinload(Supplier.infractions)))
     supplier = result.scalar_one_or_none()
     if supplier is None:
         raise HTTPException(status_code=404, detail="Supplier not found")
@@ -192,28 +217,4 @@ async def refresh_score(
         "sources_available": available,
         "sources_total": total,
         "risk_level": score_to_risk_level(score),
-    }
-
-
-@router.get("/compare")
-async def compare_suppliers(
-    ids: str = Query(description="Comma-separated supplier UUIDs, max 4"),
-    db: AsyncSession = Depends(get_db),
-    _api_key: ApiKeyAuth = None,
-):
-    id_list = [UUID(i.strip()) for i in ids.split(",") if i.strip()]
-    if len(id_list) > 4:
-        raise HTTPException(status_code=422, detail="Maximum 4 suppliers for comparison")
-
-    result = await db.execute(select(Supplier).where(Supplier.id.in_(id_list)))
-    suppliers = result.scalars().all()
-
-    return {
-        "suppliers": [
-            {
-                **SupplierDetail.model_validate(s).model_dump(),
-                "risk_level": score_to_risk_level(s.unified_score),
-            }
-            for s in suppliers
-        ]
     }

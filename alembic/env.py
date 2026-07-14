@@ -13,8 +13,10 @@ from app.models import Base
 
 config = context.config
 
-# Override sqlalchemy.url from our settings
-config.set_main_option("sqlalchemy.url", settings.database_url.replace("+asyncpg", ""))
+# Override sqlalchemy.url from our settings.
+# For async drivers (+asyncpg, +aiosqlite) strip to the sync equivalent for Alembic.
+_sync_url = settings.database_url.replace("+asyncpg", "").replace("+aiosqlite", "")
+config.set_main_option("sqlalchemy.url", _sync_url)
 
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
